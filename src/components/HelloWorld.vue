@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <BtnVoltooi text="voltooi"/>
+    <BtnFinish />
+    <BtnBack />
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -32,14 +33,17 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import BtnVoltooi from '@/components/BtnVoltooi.vue';
+import BtnFinish from '@/components/BtnFinish.vue';
+import BtnBack from '@/components/BtnBack.vue';
+
 
 @Options({
   props: {
     msg: String
   },
   components: {
-    BtnVoltooi
+    BtnFinish,
+    BtnBack
   }
 })
 export default class HelloWorld extends Vue {

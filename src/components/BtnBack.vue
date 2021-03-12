@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-voltooi" @click="onClick()">
+  <button class="btn-back" @click="onClick()">
     {{ text }}
   </button>
 </template>
@@ -12,8 +12,8 @@ import { Options, Vue } from "vue-class-component";
     text: String,
   },
 })
-export default class BtnVoltooi extends Vue {
-  text!: string;
+export default class BtnFinish extends Vue {
+  text: string = "Terug";
 
   onClick(): void {
     this.$emit("btn-clicked");
@@ -23,18 +23,18 @@ export default class BtnVoltooi extends Vue {
 
 
 <style scoped lang="scss">
-.btn-voltooi {
-  width: 200px;
-  height: 50px;
+.btn-back {
+  width: 100px;
+  height: 40px;
 
-  background-color: #42b883;
-  color: #ffffff;
+  background: transparent;
+  color: #000000;
 
   border-radius: 10px;
   border: 0px;
 
   font-family: Helvetica;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 </style>

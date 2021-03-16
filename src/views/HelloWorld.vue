@@ -3,6 +3,7 @@
     <h1>{{ msg }}</h1>
     <BtnFinish />
     <BtnBack />
+    <NavBar />
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -35,6 +36,7 @@
 import { Options, Vue } from 'vue-class-component';
 import BtnFinish from '@/components/BtnFinish.vue';
 import BtnBack from '@/components/BtnBack.vue';
+import NavBar from '@/components/NavBar.vue';
 
 
 @Options({
@@ -43,7 +45,8 @@ import BtnBack from '@/components/BtnBack.vue';
   },
   components: {
     BtnFinish,
-    BtnBack
+    BtnBack,
+    NavBar
   }
 })
 export default class HelloWorld extends Vue {

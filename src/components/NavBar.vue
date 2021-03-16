@@ -1,19 +1,36 @@
 <template>
     <div>
         <ul id="topbar">
-            <li id="fontyslogo"><img></img></li>
-            <li><a id="logout"><img id="logoutbutton"></img></a></li>
+            <li id="fontyslogo"><img></li>
+            <li><a id="logout"><img id="logoutbutton"></a></li>
         </ul>
     </div>
 </template>
 
 <style scoped lang="scss">
-@import "./styling/main.css";
+@import "src/styling/main.scss";
 #topbar{
 width: 100%;
 heigth: 10%;
 
-background-color: $fontys-purple;
+background-color: fontys-purple;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li{
+display: inline;
+}
+#fontyslogo{
+float: left;
+}
+
+#logout{
+float: right;
+}
 
 
 </style>

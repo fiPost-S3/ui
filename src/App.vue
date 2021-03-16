@@ -10,7 +10,16 @@ import { Vue } from "vue-class-component";
 export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "styling/main.scss";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: $background-color;
+  font-family: $font-family;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -18,5 +27,7 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: $background-color;
+  width: 100vw;
 }
 </style>

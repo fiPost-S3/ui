@@ -57,21 +57,15 @@
         height: #{"max(5%, 50px)"};
     }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-li{
-display: inline;
-}
-#fontyslogo{
-float: left;
-}
-
-#logout{
-float: right;
-}
+    #logoutbutton{
+        width: 10%;
+        float: right;
+        padding-right: 5%;
+    }
+    #navbarspace{
+        background-color: "#663366";
+        color: "#000000";
+    }
 
 
 </style>

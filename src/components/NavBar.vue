@@ -33,12 +33,17 @@
     #fontyslogoimage{
         width: 100%;
         heigth: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     #logoutbutton{
-        width: 10%;
+        width: 5%;
+        height: 5%;
         float: right;
         padding-right: 5%;
+        margin-top: 1%;
+        margin-bottom: 1%;
     }
     #navbarspace{
         background-color: "#663366";

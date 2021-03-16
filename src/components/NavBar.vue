@@ -61,6 +61,8 @@
         width: 10%;
         float: right;
         padding-right: 5%;
+        margin-top: 1%;
+        margin-bottom: 1%;
     }
     #navbarspace{
         background-color: "#663366";

@@ -1,36 +1,49 @@
 <template>
-    <div>
-        <ul id="topbar">
-            <li id="fontyslogo"><img></li>
-            <li><a id="logout"><img id="logoutbutton"></a></li>
+    <div id="navbarspace">
+        <ul>
+            <li id="fontyslogo"><img id="fontyslogoimage" src="@/assets/FontysLogo.png"></li>
+            <li id="logout"><a><img id="logoutbutton" src="@/assets/PlusIcon.png"></a></li>
         </ul>
     </div>
 </template>
 
+<script>
+     export default {
+    }
+</script>
+
 <style scoped lang="scss">
-@import "src/styling/main.scss";
-#topbar{
-width: 100%;
-heigth: 10%;
+    @import "src/styling/main.scss";
+    div{
+    background-color: #663366;
+    }
+    ul {
+        display: inline-block;
+        width: 100%;
+        heigth: 10%;
 
-background-color: fontys-purple;
-}
+    }
+    li{
+        display: inline;
+    }
+    #fontyslogo{
+        width: 10%;
+        float: left;
+    }
+    #fontyslogoimage{
+        width: 100%;
+        heigth: 100%;
+    }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-li{
-display: inline;
-}
-#fontyslogo{
-float: left;
-}
-
-#logout{
-float: right;
-}
+    #logoutbutton{
+        width: 10%;
+        float: right;
+        padding-right: 5%;
+    }
+    #navbarspace{
+        background-color: "#663366";
+        color: "#000000";
+    }
 
 
 </style>

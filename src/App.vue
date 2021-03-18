@@ -28,6 +28,5 @@ body {
   color: #2c3e50;
   margin-top: 60px;
   background-color: $background-color;
-  width: 100vw;
 }
 </style>

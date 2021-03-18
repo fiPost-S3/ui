@@ -23,17 +23,19 @@ export default class BtnFinish extends Vue {
 
 
 <style scoped lang="scss">
+@import "@/styling/main.scss";
+
 .btn-finish {
   width: 200px;
   height: 50px;
 
-  background-color: #42b883;
+  background-color: $green-color;
   color: #ffffff;
 
   border-radius: 10px;
   border: 0px;
 
-  font-family: Helvetica;
+  font-family: $font-family;
   font-weight: bold;
   font-size: 18px;
 }

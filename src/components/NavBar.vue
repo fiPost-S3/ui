@@ -67,6 +67,7 @@
     #navbarspace{
         background-color: "#663366";
         color: "#000000";
+        height: #{"max(5%, 50px)"};
     }
 
 

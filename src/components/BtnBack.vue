@@ -12,7 +12,7 @@ import { Options, Vue } from "vue-class-component";
     text: String,
   },
 })
-export default class BtnFinish extends Vue {
+export default class BtnBack extends Vue {
   text: string = "Terug";
 
   onClick(): void {
@@ -23,6 +23,8 @@ export default class BtnFinish extends Vue {
 
 
 <style scoped lang="scss">
+@import "@/styling/main.scss";
+
 .btn-back {
   width: 100px;
   height: 40px;
@@ -33,7 +35,7 @@ export default class BtnFinish extends Vue {
   border-radius: 10px;
   border: 0px;
 
-  font-family: Helvetica;
+  font-family: $font-family;
   font-weight: bold;
   font-size: 16px;
 }

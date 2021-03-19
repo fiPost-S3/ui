@@ -43,10 +43,8 @@ export default class Ticket extends Vue {
 .ticket {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: flex-start;
   max-width: 500px;
-  min-width: 500px;
   column-gap: 0.3em;
   z-index: 0;
 }
@@ -56,7 +54,6 @@ export default class Ticket extends Vue {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: left;
-  min-width: 300px;
   align-items: flex-start;
   row-gap: 0.3em;
 }
@@ -66,7 +63,7 @@ export default class Ticket extends Vue {
 }
 
 .ticket-image {
-  min-width: 100px;
+  margin-right: 1em;
 }
 
 .finished {
@@ -74,5 +71,15 @@ export default class Ticket extends Vue {
 }
 .unfinished{
  color: $gray-color;
+}
+
+@media only screen and (max-width: 700px) {
+  .ticket {
+    width: 80vw;
+  }
+
+  .ticket-info-bot {
+    font-size: 12px;
+  }
 }
 </style>

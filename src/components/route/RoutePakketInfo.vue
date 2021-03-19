@@ -36,9 +36,9 @@ export default class HelloWorld extends Vue {
     }
   }
 
-  Created() {
+  created() {
     if (
-      /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       )
     ) {
@@ -58,7 +58,7 @@ export default class HelloWorld extends Vue {
   justify-content: flex-start;
   background: white;
   overflow: hidden;
-  width: 700px;
+  max-width: 700px;
   padding: 3em;
   box-shadow: $shadow;
   border-radius: $border-radius;
@@ -85,8 +85,14 @@ export default class HelloWorld extends Vue {
 }
 
 @media only screen and (max-width: 600px) {
+
   .route-pakket-info-container {
-    cursor: pointer;
+    padding: 2em;
+
+    .text {
+    font-size: 25px;
+    }
   }
 }
 </style>
+

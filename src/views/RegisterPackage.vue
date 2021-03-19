@@ -1,50 +1,82 @@
 <template>
     <div>
-        <h1>Registreer pakket</h1>
-        <label>
-            <p>Naam ontvanger:</p>
-            <input v-model="Package.Name" placeholder="Naam ontvanger"/>
-            <br/>
-            <br/>
-            <button v-on:click="registerPackage">Registreer</button>
-        </label>
-        <br/>
-        <br/>
-        <div v-if="isVisible">
-            <QrcodeVue :value="id"/>
+        <BtnBack/>
+        <div class="component-container">
+            <h1>Pakket registreren</h1>
+            <div>
+                <h3>Afzender</h3>
+                <InputField @inputChanged="afzender" labelText="Naam:"/>
+            </div>
+            <div>
+                <h3>Ontvanger</h3>
+                <InputField @inputChanged="ontvanger" labelText="Naam:"/>
+            </div>
+            <div>
+                <h3>Pakket</h3>
+                <InputField @inputChanged="pakketNaam" labelText="Naam:"/>
+                <InputField @inputChanged="omschrijving" labelText="Omschrijving:"/>
+            </div>
+            <div>
+                <h3>Afhaalpunt</h3>
+                <InputField @inputChanged="afhaalpunt" labelText="Naam:"/>
+            </div>
+            <BtnFinish text="Bevestigen" v-on:click="registerPackage"/>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import {Options, Vue} from "vue-class-component";
-    import QrcodeVue from 'qrcode.vue';
+    import BtnBack from "@/components/BtnBack.vue";
+    import InputField from "@/components/InputField.vue";
+    import BtnFinish from "@/components/BtnFinish.vue";
+    import RegisterPackageModel from "@/classes/RegisterPackageModel";
 
 
     @Options({
         components: {
-            QrcodeVue
+            BtnBack,
+            InputField,
+            BtnFinish
         }
     })
 
     export default class RegisterPackage extends Vue {
-        private id : string = "";
-        private isVisible : boolean = false;
-        private Package = {
-            Name: "",
-        };
+        private package: RegisterPackageModel = new RegisterPackageModel(
+            "",
+            "",
+            "",
+            "",
+            "",
+        );
+
 
         registerPackage(): void {
-            // Send package data to backend.
-            // Receive either Ok with Id or Fail.
-            // Create QR from said Id. Example:
-            this.id = this.Package.Name;
-            this.isVisible = true;
-            window.alert('Register succesful: ' + this.Package.Name)
+            // Call to backend. Package is filled by emitters.
+        }
+
+        afzender(input: string): void {
+            this.package.Afzender = input;
+        }
+
+        ontvanger(input: string): void {
+            this.package.Ontvanger = input;
+        }
+
+        pakketNaam(input: string): void {
+            this.package.PakketNaam = input;
+        }
+
+        omschrijving(input: string): void {
+            this.package.Omschrijving = input;
+        }
+
+        afhaalpunt(input: string): void {
+            this.package.Afhaalpunt = input;
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    @import "@/styling/main.scss";
 </style>

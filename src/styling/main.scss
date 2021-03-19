@@ -4,7 +4,21 @@ $gray-color: #9D9D9D;
 $background-color: #F3F4F7;
 $pink-color: #E40286;
 $fontys-purple: #663366;
-$fontys-purple: #663366;
+$green-color: #42B883;
 $black-color: #051821;
 $shadow: 0px 3px 6px rgba(0,0,0,0.16);
 $border-radius: 0.8em;
+
+
+.component-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  background: white;
+  overflow: hidden;
+  padding: 3em;
+  margin: 1rem;
+  box-shadow: $shadow;
+  border-radius: $border-radius;
+}

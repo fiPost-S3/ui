@@ -22,3 +22,12 @@ $border-radius: 0.8em;
   box-shadow: $shadow;
   border-radius: $border-radius;
 }
+
+.container-header {
+  font-size: 30px;
+  font-weight: 600;
+  white-space: nowrap;
+  @media only screen and (max-width: 600px) {
+    font-size: 25px;
+  }
+}

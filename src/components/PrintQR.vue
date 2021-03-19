@@ -1,7 +1,7 @@
 <template>
   <div class="qr-container" @click="onClick()">
     <div class="text">
-      <div class="qr-header">Print Barcode</div>
+      <div class="container-header">Print Barcode</div>
       <div class="qr-subheader">{{ code }}</div>
     </div>
     <svg
@@ -239,21 +239,18 @@ export default PrintQR;
   box-shadow: $shadow;
   border-radius: $border-radius;
   cursor: pointer;
+  
 }
 
 .text {
   width: 50%;
-  font-family: $font-family;
   color: $black-color;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  .qr-header {
-    font-size: 30px;
-    font-weight: 600;
-  }
+
   .qr-subheader {
     font-size: 20px;
   }
@@ -270,11 +267,6 @@ export default PrintQR;
   }
 
   .text {
-    .qr-header {
-      font-size: 25px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
     .qr-subheader {
       display: none;
     }

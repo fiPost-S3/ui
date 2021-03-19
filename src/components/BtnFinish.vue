@@ -11,6 +11,7 @@ import { Options, Vue } from "vue-class-component";
   props: {
     text: String,
   },
+  emits: ['btn-clicked']
 })
 export default class BtnFinish extends Vue {
   text: string = "Voltooi";
@@ -35,7 +36,6 @@ export default class BtnFinish extends Vue {
   border-radius: 10px;
   border: 0px;
 
-  font-family: $font-family;
   font-weight: bold;
   font-size: 18px;
 }

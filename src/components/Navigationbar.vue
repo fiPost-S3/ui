@@ -50,7 +50,7 @@ export default Navigationbar;
     display: flex;
     
     .logo {
-      background: url("../assets/logo.svg");
+      background: url("../assets/logo.png");
       background-repeat: no-repeat;
       background-size: contain;
       height: 30px;

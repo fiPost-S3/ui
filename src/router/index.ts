@@ -1,11 +1,12 @@
 import {createWebHistory, createRouter} from "vue-router";
 import HelloWorld from "@/views/HelloWorld.vue";
 import RegisterPackage from "@/views/RegisterPackage.vue";
+import Home from "@/views/Home.vue";
 
 const routes = [
     {
         path: "/",
-        name: "Home",
+        name: "HelloWorld",
         component: HelloWorld,
     },
     {
@@ -13,6 +14,11 @@ const routes = [
         name: "RegisterPackage",
         component: RegisterPackage,
     },
+    {
+      path: "/home",
+      name: "Home",
+      component: Home
+    }
 ];
 
 const router = createRouter({

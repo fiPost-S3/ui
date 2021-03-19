@@ -1,4 +1,8 @@
 <template>
+ <div class="hw-container">
+    <PrintQR />
+    <RoutePakketInfo />
+  </div>
   <div class="hello">
     <h1>{{ msg }}</h1>
     <BtnFinish />
@@ -37,6 +41,9 @@ import { Options, Vue } from 'vue-class-component';
 import BtnFinish from '@/components/BtnFinish.vue';
 import BtnBack from '@/components/BtnBack.vue';
 import NavBar from '@/components/NavBar.vue';
+import PrintQR from "@/components/PrintQR.vue";
+import RoutePakketInfo from "@/components/route/RoutePakketInfo.vue"
+
 
 
 @Options({
@@ -46,7 +53,10 @@ import NavBar from '@/components/NavBar.vue';
   components: {
     BtnFinish,
     BtnBack,
-    NavBar
+    NavBar,
+    PrintQR,
+    RoutePakketInfo
+
   }
 })
 export default class HelloWorld extends Vue {
@@ -55,7 +65,13 @@ export default class HelloWorld extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+@import "@/styling/main.scss";
+.hw-container {
+  min-height: 100vh;
+  background-color: $background-color;
+}
+
 h3 {
   margin: 40px 0 0;
 }

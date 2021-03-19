@@ -35,7 +35,6 @@ export default class BtnBack extends Vue {
   border-radius: 10px;
   border: 0px;
 
-  font-family: $font-family;
   font-weight: bold;
   font-size: 16px;
 }

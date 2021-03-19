@@ -1,5 +1,3 @@
-import TicketModel from "@/classes/TicketModel";
-
 export default class PackageModel {
     public Afzender: String;
     public Ontvanger: String;

@@ -1,7 +1,12 @@
 <template>
   <div class="route-comp">
     <div v-for="ticket in ticketModels" :key="ticket.Id">
-      <Ticket :ticket="ticket" />
+      <div v-if="ticket.IsLast">
+        <FinalTicket :ticket="ticket" />
+      </div>
+      <div v-else>
+        <Ticket :ticket="ticket" />
+      </div>
     </div>
   </div>
 </template>
@@ -9,11 +14,13 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Ticket from "@/components/route/Ticket.vue";
+import FinalTicket from "@/components/route/FinalTicket.vue";
 import TicketModel from "@/classes/TicketModel";
 
 @Options({
   components: {
     Ticket,
+    FinalTicket
   },
   props: {
     ticketModels: Array,
@@ -22,6 +29,11 @@ import TicketModel from "@/classes/TicketModel";
 export default class RouteComp extends Vue {
   ticketModels!: TicketModel[];
 
+  created(){
+    if(this.ticketModels != null && this.ticketModels.length >= 1){
+      this.ticketModels[0].IsLast = true;
+    }
+  }
 }
 </script>
 

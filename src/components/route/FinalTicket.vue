@@ -1,19 +1,11 @@
 <template>
   <div class="ticket">
     <div class="ticket-image">
-        <font-awesome-icon icon="check-circle" size="2x" :class="ticket.IsFinished ? 'finished' : 'unfinished'"/>
+      <img class="image" src="@/assets/PakketRouteVoltooidIcon.png" />
     </div>
     <div class="ticket-info">
       <div class="ticket-info-top">
-        <div v-if="ticket.IsFinished">
-          {{ ticket.FinishedAt }}
-        </div>
-        <div v-else-if="ticket.IsCurrent">
-          Te doen
-        </div>
-        <div v-else>
-          N.V.T.
-        </div>
+        {{ ticket.FinishedAt }}
       </div>
       <div class="ticket-info-bot">
         {{ ticket.Description }}
@@ -33,7 +25,6 @@ import TicketModel from "@/classes/TicketModel";
 })
 export default class Ticket extends Vue {
   ticket!: TicketModel;
-
 }
 </script>
 
@@ -43,7 +34,7 @@ export default class Ticket extends Vue {
 .ticket {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: flex-start;
   max-width: 500px;
   column-gap: 0.5em;
   z-index: 0;
@@ -62,6 +53,12 @@ export default class Ticket extends Vue {
   font-weight: bold;
 }
 
+.ticket-info-bot {
+  font-weight: bold;
+  color: $pink_color;
+  font-size: 18px;
+}
+
 .ticket-image {
   margin-right: 1em;
   width: 50px;
@@ -71,11 +68,9 @@ export default class Ticket extends Vue {
   align-items: center;
 }
 
-.finished {
- color: $fontys-purple;
-}
-.unfinished{
- color: $gray-color;
+.image {
+  width: 3em;
+  height: 3em;
 }
 
 @media only screen and (max-width: 700px) {

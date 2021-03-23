@@ -10,6 +10,7 @@ export default class TicketModel {
     public NextTicketId: number;
     public IsCurrent: Boolean;
     public Description: String;
+    public IsLast: Boolean = false;
 
     constructor(id: number, packageId: number, toDoLocationId: number, createdAt: String, createdByPCN: number, finishedByPCN: number
         , isFinished: Boolean, nextTicketId: number, finishedAt: String, isCurrent: Boolean, description: String){

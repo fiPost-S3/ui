@@ -15,6 +15,8 @@ import PrintQR from "@/components/PrintQR.vue";
 import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
 import NextStep from "@/components/NextStep.vue";
 import TicketModel from "@/classes/TicketModel";
+import PackageModel from '@/classes/RegisterPackageModel';
+import { pakketService } from "@/services/pakketservice";
 
 @Options({
   components: {
@@ -66,6 +68,12 @@ export default class HelloWorld extends Vue {
       "Zending is geregistreerd bij Fontys"
     )
   ];
+  private results : Array<PackageModel> = [];
+
+  async created(){
+    this.results = await pakketService.getAll();
+    console.log(this.results);
+  }
 }
 </script>
 

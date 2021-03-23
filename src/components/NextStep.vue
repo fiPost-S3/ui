@@ -6,7 +6,10 @@
       <BtnFinish class="finish" @btn-clicked="finishStep()" />
     </div>
     <div v-else class="next-step-container">
-      <div class="header">Voltooid</div>
+      <div class="container-header">
+        <font-awesome-icon icon="flag-checkered" />
+        Voltooid
+      </div>
     </div>
   </div>
 </template>

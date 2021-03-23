@@ -8,7 +8,8 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component';
+import PackageDetails from '@/components/PackageDetails.vue';
 import PrintQR from "@/components/PrintQR.vue";
 import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
 import NextStep from "@/components/NextStep.vue";
@@ -16,6 +17,7 @@ import TicketModel from "@/classes/TicketModel";
 
 @Options({
   components: {
+    PackageDetails,
     PrintQR,
     RoutePackageInfo,
     NextStep,

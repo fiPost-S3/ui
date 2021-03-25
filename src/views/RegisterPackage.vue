@@ -5,20 +5,19 @@
             <h1>Pakket registreren</h1>
             <div>
                 <h3>Afzender</h3>
-                <InputField @inputChanged="afzender" labelText="Naam:"/>
+                <InputField @inputChanged="sender" labelText="Naam:"/>
             </div>
             <div>
                 <h3>Ontvanger</h3>
-                <InputField @inputChanged="ontvanger" labelText="Naam:"/>
+                <InputField @inputChanged="receiver" labelText="Naam:"/>
             </div>
             <div>
                 <h3>Pakket</h3>
-                <InputField @inputChanged="pakketNaam" labelText="Naam:"/>
-                <InputField @inputChanged="omschrijving" labelText="Omschrijving:"/>
+                <InputField @inputChanged="name" labelText="Naam:"/>
             </div>
             <div>
                 <h3>Afhaalpunt</h3>
-                <InputField @inputChanged="afhaalpunt" labelText="Naam:"/>
+                <InputField @inputChanged="collectionPoint" labelText="Naam:"/>
             </div>
             <BtnFinish text="Bevestigen" v-on:click="registerPackage"/>
         </div>
@@ -31,6 +30,7 @@
     import InputField from "@/components/InputField.vue";
     import BtnFinish from "@/components/BtnFinish.vue";
     import RegisterPackageModel from "@/classes/RegisterPackageModel";
+    import {pakketService} from "@/services/pakketservice";
 
 
     @Options({
@@ -47,32 +47,29 @@
             "",
             "",
             "",
-            "",
         );
 
-
-        registerPackage(): void {
+        async registerPackage() {
             // Call to backend. Package is filled by emitters.
+            let response = await pakketService.post(this.package);
+            window.alert("Registratie voltooid");
+            console.log(response); // Only for testing
         }
 
-        afzender(input: string): void {
-            this.package.Afzender = input;
+        sender(input: string): void {
+            this.package.Sender = input;
         }
 
-        ontvanger(input: string): void {
-            this.package.Ontvanger = input;
+        receiver(input: string): void {
+            this.package.ReceiverId = input;
         }
 
-        pakketNaam(input: string): void {
-            this.package.PakketNaam = input;
+        name(input: string): void {
+            this.package.Name = input;
         }
 
-        omschrijving(input: string): void {
-            this.package.Omschrijving = input;
-        }
-
-        afhaalpunt(input: string): void {
-            this.package.Afhaalpunt = input;
+        collectionPoint(input: string): void {
+            this.package.CollectionPointId = input;
         }
     }
 </script>

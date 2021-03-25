@@ -49,5 +49,6 @@
 
     .input:focus {
         outline: none;
+        border: #999999 solid 2px;
     }
 </style>

@@ -30,4 +30,5 @@ export default class App extends Vue {}
   background-color: $background-color;
   padding: 1em;
 }
+
 </style>

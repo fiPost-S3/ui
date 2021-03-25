@@ -3,8 +3,8 @@
     <NextStep :ticket="ticketModels[0]" />
     <PrintQR />
     <RoutePackageInfo :ticketModels="ticketModels" />
+    <SearchContainer />
     <PackageDetails />
-    <input type="file" accept="image/*">
   </div>
 </template>
 
@@ -14,9 +14,13 @@ import PackageDetails from '@/components/PackageDetails.vue';
 import PrintQR from "@/components/PrintQR.vue";
 import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
 import NextStep from "@/components/NextStep.vue";
+import SearchContainer from "@/components/SearchContainer.vue";
 import TicketModel from "@/classes/TicketModel";
 import PackageModel from '@/classes/RegisterPackageModel';
 import { pakketService } from "@/services/pakketservice";
+
+// Mock data.
+import tickets from "@/data/tickets_mock";
 
 @Options({
   components: {
@@ -24,52 +28,12 @@ import { pakketService } from "@/services/pakketservice";
     PrintQR,
     RoutePackageInfo,
     NextStep,
+    SearchContainer
   },
 })
 export default class HelloWorld extends Vue {
-  private ticketModels: TicketModel[] = [  
-    new TicketModel(
-      1,
-      1,
-      1,
-      "13 februari 13:16",
-      405273,
-      405273,
-      true,
-      2,
-      "14 februari 16:32",
-      false,
-      "Zending is aangekomen bij Fontys HVK"
-    ),
-    new TicketModel(
-      2,
-      1,
-      1,
-      "12 februari 10:28",
-      405273,
-      405273,
-      true,
-      3,
-      "12 februari 14:23",
-      false,
-      "Zending onderweg naar Fontys HVK"
-    ),
-     new TicketModel(
-      1,
-      1,
-      1,
-      "10 februari 13:16",
-      405273,
-      405273,
-      true,
-      2,
-      "11 februari 10:32",
-      false,
-      "Zending is geregistreerd bij Fontys"
-    )
-  ];
+  private ticketModels: TicketModel[] = tickets;
   private results : Array<PackageModel> = [];
-
   async created(){
     this.results = await pakketService.getAll();
     console.log(this.results);

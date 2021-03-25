@@ -5,6 +5,9 @@
     <RoutePackageInfo :ticketModels="ticketModels" />
     <SearchContainer />
     <PackageDetails />
+    <section class="component-container">
+      <date-time-input name="date-time-input" labelText="date time input: "/>
+    </section>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ import SearchContainer from "@/components/SearchContainer.vue";
 import TicketModel from "@/classes/TicketModel";
 import PackageModel from '@/classes/RegisterPackageModel';
 import { pakketService } from "@/services/pakketservice";
+import DateTimeInput from "@/components/DateTimeInput.vue"
 
 // Mock data.
 import tickets from "@/data/tickets_mock";
@@ -28,7 +32,8 @@ import tickets from "@/data/tickets_mock";
     PrintQR,
     RoutePackageInfo,
     NextStep,
-    SearchContainer
+    SearchContainer,
+    DateTimeInput
   },
 })
 export default class HelloWorld extends Vue {

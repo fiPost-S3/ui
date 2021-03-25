@@ -1,30 +1,33 @@
 <template>
-    <table class="table">
-        <thead>
-            <tr>
-                <th v-for="column in columns" :key="column">
-                    <a href="#" class="table-sort" @click="sortBy(column)">
-                        {{column}}
-                        <span v-if="reverse && sortKey==column">
-                        <font-awesome-icon icon="sort-up" :class="sortKey==column ? '' : 'sort-arrow-defocus'"/>
-                        </span>
-                        <span v-else>
-                        <font-awesome-icon icon="sort-down" :class="sortKey==column ? '' : 'sort-arrow-defocus'"/>
-                        </span>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="item in sortedList" :key="item" >
-                <td>{{item.ID}}</td>
-                <td>{{item.Ontvanger}}</td>
-                <td>{{item.Status}}</td>
-                <td>{{item.Locatie}}</td>
-                <td>{{item.Datum}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="component-container table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th v-for="(column, index) in columns" :key="column">
+                        <a href="#" @click="sortBy(columnKeys[index])">
+                            {{column}}
+                            <span v-if="reverse && sortKey==columnKeys[index]">
+                            <font-awesome-icon icon="sort-up" :class="sortKey==columnKeys[index] ? 'sort-arrow-focus' : 'sort-arrow-defocus'"/>
+                            </span>
+                            <span v-else>
+                            <font-awesome-icon icon="sort-down" :class="sortKey==columnKeys[index] ? 'sort-arrow-focus' : 'sort-arrow-defocus'"/>
+                            </span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in sortedList" :key="item" >
+                    <td>{{item.id}}</td>
+                    <td>{{item.receiverId}}</td>
+                    <td>{{item.status}}</td>
+                    <td>{{item.collectionPointId}}</td>
+                    <td v-if="item.tickets !== null">{{item.tickets[0].createdAt}}</td>
+                    <td v-else>Geen Datum</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script lang="ts">
@@ -36,13 +39,14 @@ import _ from 'lodash';
 const PakketTable = defineComponent({
     data() {
         return {
-            sortKey: "ID",
+            sortKey: "id",
             reverse: false
         }
     },
     props: {
-        columns: [],
-        packages: []
+        columns: Array,
+        columnKeys: Array,
+        packages: Array
     },
     methods: {
         sortBy: function(sortKey: string) {
@@ -61,19 +65,40 @@ const PakketTable = defineComponent({
 export default PakketTable;
 </script>
 
-<style scoped>
-    .table-sort {
-        color: #000;
-        font-color: #000;
-        text-decoration: none;
+<style scoped lang="scss">
+    @import "@/styling/main.scss";
+    .table-container{
+        padding: 0 !important;
     }
 
     .sort-arrow-defocus {
-        color: #999;
+        color: $gray-color;
+    }
+
+    .sort-arrow-focus {
+        color: $fontys-purple;
     }
 
     .table{
+        border-collapse: collapse;
         width: 100%;
         table-layout: fixed;
+    }
+
+    thead tr{
+        box-shadow: $shadow;
+    }
+
+    th a{
+        color: $black-color;
+        text-decoration: none;
+    }
+
+    table td,th{
+        padding: 0.75em !important;
+    }
+
+    td:first-child{
+        font-weight: bold;
     }
 </style>

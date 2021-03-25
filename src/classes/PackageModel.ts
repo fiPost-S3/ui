@@ -2,24 +2,23 @@ import TicketModel from "@/classes/TicketModel";
 
 export default class PackageModel {
     public Id: String;
-    public Afzender: String;
-    public Ontvanger: String;
-    public PakketNaam: String;
-    public Omschrijving: String;
-    public Afhaalpunt: String;
+    public ReceiverId: String;
+    public CollectionPointId: String;
+    public Sender: String;
+    public Name: String;
     public Status: String;
-    public RouteKlaar: Boolean;
-    public Ticket: Array<TicketModel>;
+    public RouteFinished: Boolean;
+    public Tickets: Array<TicketModel>;
 
-    constructor(Id: String, Afzender: String, Ontvanger: String, PakketNaam: String, Omschrijving: String, Afhaalpunt: String, Status: String, RouteKlaar: Boolean, Ticket: Array<TicketModel>) {
+
+    constructor(Id: String, ReceiverId: String, CollectionPointId: String, Sender: String, Name: String, Status: String, RouteFinished: Boolean, Tickets: Array<TicketModel>) {
         this.Id = Id;
-        this.Afzender = Afzender;
-        this.Ontvanger = Ontvanger;
-        this.PakketNaam = PakketNaam;
-        this.Omschrijving = Omschrijving;
-        this.Afhaalpunt = Afhaalpunt;
+        this.ReceiverId = ReceiverId;
+        this.CollectionPointId = CollectionPointId;
+        this.Sender = Sender;
+        this.Name = Name;
         this.Status = Status;
-        this.RouteKlaar = RouteKlaar;
-        this.Ticket = Ticket;
+        this.RouteFinished = RouteFinished;
+        this.Tickets = Tickets;
     }
 }

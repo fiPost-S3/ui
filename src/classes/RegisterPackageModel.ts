@@ -1,15 +1,14 @@
 export default class PackageModel {
-    public Afzender: String;
-    public Ontvanger: String;
-    public PakketNaam: String;
-    public Omschrijving: String;
-    public Afhaalpunt: String;
+    public Sender: String;
+    public ReceiverId: String;
+    public Name: String;
+    public CollectionPointId: String;
 
-    constructor(Afzender: String, Ontvanger: String, PakketNaam: String, Omschrijving: String, Afhaalpunt: String) {
-        this.Afzender = Afzender;
-        this.Ontvanger = Ontvanger;
-        this.PakketNaam = PakketNaam;
-        this.Omschrijving = Omschrijving;
-        this.Afhaalpunt = Afhaalpunt;
+    
+    constructor(Sender: String, ReceiverId: String, Name: String, CollectionPointId: String) {
+        this.Sender = Sender;
+        this.ReceiverId = ReceiverId;
+        this.Name = Name;
+        this.CollectionPointId = CollectionPointId;
     }
 }

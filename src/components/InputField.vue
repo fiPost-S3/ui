@@ -1,25 +1,31 @@
 <template>
     <label class="input-container">
-        <p>{{labelText}}</p>
-        <input type="text" class="input" v-model="input" @change="updateInput()"/>
+        <p>{{label}}</p>
+        <input
+                class="input"
+                type="text"
+                v-model="text"
+                @change="changed"/>
     </label>
 </template>
 
 <script lang="ts">
     import {Options, Vue} from "vue-class-component";
+    import {Emit, Prop} from "vue-property-decorator";
 
-    @Options ({
-        props: {
-            labelText: String
-        },
-        emits: ['inputChanged']
+    @Options({
+        emits: ['input-changed']
     })
 
     export default class InputField extends Vue {
-        input: string = "";
+        @Prop() public label!: String;
+        @Prop() public input!: String;
 
-        updateInput() {
-            this.$emit('inputChanged', this.input)
+        private text: String = this.input;
+
+        @Emit("input-changed")
+        changed() {
+            return this.text;
         }
     }
 </script>

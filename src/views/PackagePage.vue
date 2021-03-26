@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isLoading">
+    <btn-back />
     <div class="pi-container">
       <div class="pi-item-container">
         <NextStep :ticket="ticketModels[0]" />
@@ -22,6 +23,7 @@ import NextStep from "@/components/NextStep.vue";
 import TicketModel from "@/classes/TicketModel";
 import PackageModel from "@/classes/PackageModel";
 import { pakketService } from "@/services/pakketservice";
+import BtnBack from "@/components/BtnBack.vue";
 
 @Options({
   components: {
@@ -29,6 +31,7 @@ import { pakketService } from "@/services/pakketservice";
     PrintQR,
     RoutePackageInfo,
     NextStep,
+    BtnBack
   },
 })
 export default class PackagePage extends Vue {

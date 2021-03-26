@@ -7,17 +7,12 @@ import PackagePage from "@/views/PackagePage.vue";
 
 const routes = [
     {
-        path: "/",
-        name: "HelloWorld",
-        component: HelloWorld,
-    },
-    {
         path: "/registratie",
         name: "RegisterPackage",
         component: RegisterPackage,
     },
     {
-        path: "/home",
+        path: "/",
         name: "Home",
         component: Home
     },

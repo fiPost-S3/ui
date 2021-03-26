@@ -1,7 +1,7 @@
 <template>
-  <button class="btn-back" @click="onClick()">
+  <div class="btn-back" @click="onClick()">
     {{ text }}
-  </button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,7 +16,7 @@ export default class BtnBack extends Vue {
   text: string = "Terug";
 
   onClick(): void {
-    this.$emit("btn-clicked");
+    this.$router.go(-1);
   }
 }
 </script>
@@ -37,5 +37,6 @@ export default class BtnBack extends Vue {
 
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
 }
 </style>

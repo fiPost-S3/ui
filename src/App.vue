@@ -9,8 +9,6 @@
 import { Vue, Options } from "vue-class-component";
 import Navigationbar from "@/components/Navigationbar.vue";
 
-
-
 @Options({
   components: {
     Navigationbar

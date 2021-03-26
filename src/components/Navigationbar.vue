@@ -1,8 +1,7 @@
 <template>
   <div class="nav-container">
     <div class="nav-main">
-      <!-- <Logo style="margin-left: 2em" width="35px" /> -->
-      <div class="logo-container">
+      <div class="logo-container" @click="logoClicked()">
         <div class="logo"></div>
       </div>
       <div class="other">
@@ -14,7 +13,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-const Navigationbar = defineComponent({});
+const Navigationbar = defineComponent({
+  methods: {
+    logoClicked() : void {
+      this.$router.push('/');
+    }
+  }
+});
 export default Navigationbar;
 </script>
 
@@ -46,6 +51,8 @@ export default Navigationbar;
     max-width: 100px;
     width: 20%;
     height: 90%;
+    margin: 10px;
+    margin-left: 15px;
     cursor: pointer;
     display: flex;
     
@@ -57,6 +64,10 @@ export default Navigationbar;
       width: 100px;
       align-self: center;
     }
+  }
+
+  .other {
+    margin-right: 15px;
   }
 }
 

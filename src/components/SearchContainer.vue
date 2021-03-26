@@ -1,8 +1,10 @@
 <template>
-  <div class="search-main">
-    <div class="search-title">Zoeken</div>
-    <Search @valueChanged="valueChanged" />
-    <QrReader />
+  <div class="component-container no-padding">
+    <div class="search-main">
+      <div class="search-title">Zoeken</div>
+      <Search @valueChanged="valueChanged" />
+      <QrReader />
+    </div>
   </div>
 </template>
 
@@ -36,21 +38,26 @@ export default SearchContainer;
 <style lang="scss" scoped>
 @import "@/styling/main.scss";
 
+.no-padding {
+  padding: 0 !important;
+}
+
 .search-main {
   display: flex;
-  align-self: middle;
-  background-color: white;
-  width: 90vw;
-  padding: 2em 0.7em;
-  box-shadow: $shadow;
-  border-radius: $border-radius;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  padding: 0.75rem;
+}
 
-  .search-title {
-    margin: auto 0.5em;
-    text-align: center;
-    font-family: $font-family;
-    font-weight: 550;
-  }
+.search-main div {
+  margin: 0 0.75rem;
+}
+
+.search-title {
+  text-align: center;
+  font-family: $font-family;
+  font-weight: 550;
+  margin: auto 0 !important;
 }
 
 .qr {

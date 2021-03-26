@@ -1,4 +1,4 @@
-$font-family: "Helvetica Neue", "Avenir", "Helvetica";
+$font-family: "Metropolis", Avenir, Helvetica, Arial, sans-serif;
 $fontys-purple-color: #663366;
 $gray-color: #9D9D9D;
 $background-color: #F3F4F7;
@@ -8,6 +8,7 @@ $green-color: #42B883;
 $black-color: #051821;
 $shadow: 0px 3px 6px rgba(0,0,0,0.16);
 $border-radius: 0.8em;
+$gradient: linear-gradient(90deg, rgba(193,71,153,1) 0%, rgba(79,60,201,1) 100%); 
 
 .component-container {
   display: flex;
@@ -25,8 +26,23 @@ $border-radius: 0.8em;
 .container-header {
   font-size: 30px;
   font-weight: 600;
-  white-space: nowrap;
+  white-space: normal;
   @media only screen and (max-width: 600px) {
     font-size: 25px;
   }
 }
+
+.container-subheader {
+  font-size: 20px;
+  font-weight: 600;
+  white-space: normal;
+  @media only screen and (max-width: 600px) {
+    font-size: 16px;
+  }
+}
+
+.light {
+  font-family: "Avenir";
+  // color: $gray-color;
+}
+

@@ -1,7 +1,7 @@
 <template>
   <div class="route-comp">
     <div v-for="ticket in ticketModels" :key="ticket.Id">
-      <div v-if="ticket.IsLast">
+      <div v-if="ticket.IsLast && ticket.IsFinished">
         <FinalTicket :ticket="ticket" />
       </div>
       <div v-else>

@@ -64,7 +64,6 @@ export default class RoutePackageInfo extends Vue {
   justify-content: flex-start;
   background: white;
   overflow: hidden;
-  max-width: 700px;
   padding: 3em;
   box-shadow: $shadow;
   border-radius: $border-radius;

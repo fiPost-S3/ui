@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in sortedList" :key="item" >
+                <tr v-for="item in sortedList" :key="item" @click="onClick(item.id)">
                     <td>{{item.id}}</td>
                     <td>{{item.receiverId}}</td>
                     <td>{{item.status}}</td>
@@ -52,6 +52,12 @@ const PakketTable = defineComponent({
         sortBy: function(sortKey: string) {
             this.reverse = (this.sortKey == sortKey) ? ! this.reverse : false;
             this.sortKey = sortKey;
+        },
+        onClick: function(id: string) {
+            this.$router.push({
+                name: 'PackagePage',
+                params: { id: id }
+            });
         }
     },
     computed: {

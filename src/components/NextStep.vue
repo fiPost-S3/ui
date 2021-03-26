@@ -47,7 +47,6 @@ export default class NextStep extends Vue {
   justify-content: space-between;
   background: white;
   overflow: hidden;
-  max-width: 700px;
   padding: 3em;
   box-shadow: $shadow;
   border-radius: $border-radius;

@@ -73,19 +73,26 @@ export default class PackagePage extends Vue {
       "Zending is geregistreerd bij Fontys"
     ),
   ];
-  private packageModel: PackageModel = new PackageModel("", "", "", "jaap", "", "", false, []);;
+  private packageModel: PackageModel = new PackageModel(
+    "",
+    "",
+    "",
+    "jaap",
+    "",
+    "",
+    false,
+    []
+  );
   private isLoading: Boolean = true;
 
   async created() {
-    try{
-    const result  = await pakketService.get(
-      this.$router.currentRoute.value.params.id
-    );
-    this.packageModel = result;
-    }
-    catch (exception){
-    console.log(exception);
-
+    try {
+      const result = await pakketService.get(
+        this.$router.currentRoute.value.params.id
+      );
+      this.packageModel = result;
+    } catch (exception) {
+      console.log(exception);
     }
     this.isLoading = false;
   }

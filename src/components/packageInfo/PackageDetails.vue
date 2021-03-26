@@ -49,7 +49,7 @@ import PackageModel from "@/classes/PackageModel"
     deliveryLocation: Object,
     finalLocation: Object,
     dropPoint: String,
-    packageModel: PackageModel
+    packageModel: Object
   },
   components: {
     AddressBox,

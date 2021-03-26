@@ -13,7 +13,6 @@ export default class PakketService {
   }
   public async get(id): Promise<PackageModel> {
    const response =  await http.get(`/api/packages/${id}`);
-   console.log(response);
    return response.data;
  }
 }

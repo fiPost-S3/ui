@@ -46,7 +46,6 @@ export default class Ticket extends Vue {
   align-items: flex-start;
   max-width: 500px;
   column-gap: 0.5em;
-  z-index: 0;
 }
 
 .ticket-info {
@@ -79,11 +78,7 @@ export default class Ticket extends Vue {
 }
 
 @media only screen and (max-width: 700px) {
-  .ticket {
-    width: 80vw;
-  }
-
-  .ticket-info-bot {
+  .ticket-info {
     font-size: 12px;
   }
 }

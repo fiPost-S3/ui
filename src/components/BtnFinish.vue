@@ -30,11 +30,12 @@ export default class BtnFinish extends Vue {
   width: 200px;
   height: 50px;
 
-  background-color: $green-color;
+  background: $gradient;
   color: #ffffff;
 
   border-radius: 10px;
   border: 0px;
+  box-shadow: $shadow;
 
   font-weight: bold;
   font-size: 18px;

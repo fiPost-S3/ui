@@ -234,7 +234,6 @@ export default PrintQR;
   align-items: middle;
   background: white;
   overflow: hidden;
-  max-width: 700px;
   padding: 3em;
   box-shadow: $shadow;
   border-radius: $border-radius;

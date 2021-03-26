@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import PackageDetails from '@/components/PackageDetails.vue';
+import PackageDetails from '@/components/packageInfo/PackageDetails.vue';
 import PrintQR from "@/components/PrintQR.vue";
 import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
 import NextStep from "@/components/NextStep.vue";

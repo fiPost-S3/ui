@@ -11,6 +11,11 @@ export default class PakketService {
      const response = await http.post(`api/packages`, packageModel);
      return response.data;
   }
+  public async get(id): Promise<PackageModel> {
+   const response =  await http.get(`/api/packages/${id}`);
+   console.log(response);
+   return response.data;
+ }
 }
 
 // A singleton instance

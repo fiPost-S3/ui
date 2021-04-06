@@ -19,7 +19,6 @@ import { Options, Vue } from "vue-class-component";
     text: String,
   },
   emits: ['checked']
-
 })
 export default class CheckBox extends Vue {
   private checked: Boolean = false;

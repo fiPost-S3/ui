@@ -1,5 +1,4 @@
 import {createWebHistory, createRouter} from "vue-router";
-import HelloWorld from "@/views/HelloWorld.vue";
 import RegisterPackage from "@/views/RegisterPackage.vue";
 import Home from "@/views/Home.vue";
 import PakketOverzicht from "@/views/PakketOverzicht.vue";

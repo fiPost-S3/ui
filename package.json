@@ -1,5 +1,5 @@
 {
-  "name": "ipost-ui",
+  "name": "IPost",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,9 +8,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/vue-fontawesome": "^3.0.0-3",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
+    "pdfmake": "^0.1.70",
     "vue": "^3.0.0",
+    "vue-axios": "^3.2.4",
     "vue-class-component": "^8.0.0-0",
+    "vue-property-decorator": "latest",
     "vue-router": "^4.0.4"
   },
   "devDependencies": {
@@ -25,6 +33,10 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
-    "typescript": "~3.9.3"
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.1",
+    "typescript": "~3.9.3",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12"
   }
 }

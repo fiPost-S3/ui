@@ -1,0 +1,39 @@
+<template>
+  <!-- The `label` is attached to the hidden file input -->
+    <label class="qr"  for="cameraFileInput">
+      <!-- The hidden file `input` for opening the native camera -->
+      <input
+        id="cameraFileInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+      />
+    </label>
+</template>
+
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+import { defineComponent } from "vue";
+
+const Search = defineComponent({});
+
+export default Search;
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+@import "@/styling/main.scss";
+.qr {
+  background-image: url("../assets/QRIcoon.png");
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  margin: auto 15px;
+  cursor: pointer;
+}
+
+#cameraFileInput {
+  display: none;
+}
+
+</style>

@@ -504,3 +504,5 @@ MigrationBackup/
 
 # screenshots
 screenshots
+
+.env

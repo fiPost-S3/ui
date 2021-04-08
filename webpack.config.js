@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
   },
   devServer: {
-    proxy: process.env.VUE_APP_PROXY,
+    proxy: process.env.VUE_APP_PAKKET_SERVICE_PROXY,
     inline: true,
     hot: true,
     stats: 'minimal',

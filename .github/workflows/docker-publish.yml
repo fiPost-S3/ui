@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2      
-               
-      - name: Define variables
         env:
             VUE_APP_BASE_URL: ${{ secrets.UI_HOST }}
             VUE_APP_PAKKET_SERVICE_PROXY: ${{ SECRETS.PAKKETSERVICE_HOST }}

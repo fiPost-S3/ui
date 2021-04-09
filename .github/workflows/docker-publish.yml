@@ -20,3 +20,12 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: fipost/ui
           tag_with_ref: true
+          
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: fipost/ui/ui
+          tag_with_ref: true

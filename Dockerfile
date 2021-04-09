@@ -2,8 +2,8 @@
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 
-ARG VUE_APP_PAKKET_SERVICE="http://localhost:5001"
-ENV VUE_APP_PAKKET_SERVICE ${VUE_APP_PAKKET_SERVICE}
+ARG VUE_APP_PAKKETSERVICE="http://localhost:5001"
+ENV VUE_APP_PAKKET_SERVICE ${VUE_APP_PAKKETSERVICE}
 
 COPY package*.json ./
 RUN npm install

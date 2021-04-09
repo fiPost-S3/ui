@@ -1,3 +1,8 @@
+![Logo](https://github.com/FIPost/docs/blob/master/assets/logo-name.png)
+[![Publish Docker image](https://github.com/FIPost/pakketservice/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/FIPost/ui/actions/workflows/docker-publish.yml)
+# pakketservice
+.NET Core 3.1 API service for Fontys Internal Packages.
+
 # IPost - Fontys Interne Post
 Deze opdracht beoogt het interne post-systeem van de hele Fontys te moderniseren. Op dit moment wordt dit veelal handmatig gedaan. Het doel is dit te verplaatsen naar een systeem dat vergelijkbare functies heeft als een systeem van PostNL. Mogelijkheden die het systeem zou kunnen hebben is dat het op elk moment mogelijk moet zijn te zien wat de status is van een intern stuk post en waar het zich bevindt in de organisatie.
 Let hierbij op dat deze opdracht zich niet alleen strekt tot de FHICT, maar de gehele organisatie met meer dan 4300 werknemers en 44.000 studenten.

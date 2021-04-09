@@ -20,6 +20,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: fipost/ui
           tag_with_ref: true
+          build_args: "VUE_APP_PAKKETSERVICE=${{ secrets.PAKKETSERVICE_HOST }}"
+
+
         env:
           VUE_APP_BASE_URL: ${{ secrets.UI_HOST }}
           VUE_APP_PAKKET_SERVICE: ${{ secrets.PAKKETSERVICE_HOST }}

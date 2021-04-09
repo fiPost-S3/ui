@@ -6,6 +6,9 @@ export default class PakketService {
    private baseUrl: String = process.env.VUE_APP_PAKKET_SERVICE;
 
    public async getAll(): Promise<Array<PackageModel>> {
+      console.log(process.env);
+      console.log(process.env.VUE_APP_PAKKET_SERVICE);
+      console.log(process.env.VUE_APP_BASE_URL);
       const response = await http.get(`${this.baseUrl}/api/packages`);
       return response.data;
    }

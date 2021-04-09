@@ -13,7 +13,7 @@ jobs:
       - name: Define variables
         env:
             VUE_APP_BASE_URL: ${{ secrets.UI_HOST }}
-            VUE_APP-PAKKET-SERVICE-PROXY: ${{ SECRETS.PAKKETSERVICE_HOST }}
+            VUE_APP_PAKKET_SERVICE_PROXY: ${{ SECRETS.PAKKETSERVICE_HOST }}
           
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1

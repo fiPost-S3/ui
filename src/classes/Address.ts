@@ -1,15 +1,18 @@
-export default class Address {
-    public Street: string;
-    public StreetNr: number;
-    public PostalCode: string;
-    public City: string;
-    public Country: string;
+import City from "./City";
 
-    constructor(street: string, streetNr: number, postalCode: string, city: string, country: string){
-        this.Street = street;
-        this.StreetNr = streetNr;
-        this.PostalCode = postalCode;
-        this.City = city;
-        this.Country = country;
+export default class Address {
+    public city: City;
+    public street: string;
+    public number: Number;
+    public addition: string;
+    public postalCode: string;
+
+
+    constructor(city: City, street: string, postalCode: string, number: Number, addition: string){
+        this.city = city;
+        this.street = street;
+        this.postalCode = postalCode;
+        this.number = number;
+        this.addition = addition;
     }
 }

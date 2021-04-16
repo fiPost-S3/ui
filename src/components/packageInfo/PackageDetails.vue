@@ -36,6 +36,7 @@
 import { Options, Vue } from "vue-class-component";
 import Address from "@/classes/Address";
 import Contact from "@/classes/Contact";
+import City from "@/classes/City";
 import AddressBox from "@/components/packageInfo/AddressBox.vue";
 import ContactDetails from "@/components/packageInfo/ContactDetails.vue";
 import SenderDetails from "@/components/packageInfo/SenderDetails.vue";
@@ -61,11 +62,11 @@ import PackageModel from "@/classes/PackageModel"
 export default class PackageDetails extends Vue {
   packageModel!: PackageModel;
   fAddress: Address = new Address(
+    new City("13123", "Tilburg"),
     "Professor Goossenslaan",
-    1,
     "5022DM",
-    "Tilburg",
-    "Nederland"
+    1,
+    "",
   );
 
   reciever: Contact = new Contact(

@@ -40,16 +40,17 @@ import SelectOption from "@/classes/helpers/SelectOption";
   emits: ["select-changed"],
 })
 export default class CBSearchSuggestions extends Vue {
-
   @Prop()
-  private selectedOption!: SelectOption;
+  private selectedOption?: SelectOption;
 
-  @Watch('selectedOption', { immediate: true, deep: true })
+  @Watch("selectedOption", { immediate: true, deep: true })
   onPropertyChanged(value: SelectOption, oldValue: SelectOption) {
-    this.selectedRef.name = value.name;
+    if (value) {
+      this.selectedRef.name = value.name;
+    }
   }
 
-  private selectedRef: SelectOption = new SelectOption("","")
+  private selectedRef: SelectOption = new SelectOption("", "");
 
   private placeholder: string = "";
   private suggestions: Array<SelectOption> = [];
@@ -58,6 +59,7 @@ export default class CBSearchSuggestions extends Vue {
   private valid: Boolean = true;
 
   private onChange(option: SelectOption): void {
+    console.log(this.selectedRef);
     this.selectedRef = new SelectOption(option.id, option.name);
     this.open = false;
     this.$emit("select-changed", this.selectedRef);
@@ -77,11 +79,10 @@ export default class CBSearchSuggestions extends Vue {
     this.open = false;
   }
 
-  private startFocus(){
+  private startFocus() {
     this.suggestions = this.options;
     this.open = true;
   }
-
 }
 </script>
 

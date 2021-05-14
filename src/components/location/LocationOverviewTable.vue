@@ -1,15 +1,18 @@
 <template>
-  <div class="component-container" style="padding: 0 !important">
-    <Table :items="items" @cell-clicked="CellClicked" />
-    <LocationModal v-if="modalOpen" @close-location="CloseModal()">
-      <LocationInfo
-        :ColumnType="ColumnType"
-        :cityId="cityId"
-        :buildingId="buildingId"
-        :roomId="roomId"
-        @reload-table="ReloadTable"
-      />
-    </LocationModal>
+  <div>
+    <LoadingIcon v-if="loading" />
+    <div v-else class="component-container" style="padding: 0 !important">
+      <Table :items="items" @cell-clicked="CellClicked" />
+      <LocationModal v-if="modalOpen" @close-location="CloseModal()">
+        <LocationInfo
+          :ColumnType="ColumnType"
+          :cityId="cityId"
+          :buildingId="buildingId"
+          :roomId="roomId"
+          @reload-table="ReloadTable"
+        />
+      </LocationModal>
+    </div>
   </div>
 </template>
 
@@ -22,16 +25,21 @@ import { ColumnType } from "@/classes/table/ColumnType";
 import Room from "@/classes/Room";
 import { roomService } from "@/services/locatieService/roomservice";
 import { getCurrentInstance } from "@vue/runtime-core";
+import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 import { TableCell } from "@/classes/table/TableCell";
 
 @Options({
   components: {
     Table,
+    LoadingIcon,
     LocationInfo,
     LocationModal,
   },
 })
 export default class LocationOverviewTable extends Vue {
+  private loading: boolean = true;
+  private error: boolean = false;
+
   /* LocationInfo Modal */
   public ColumnType: ColumnType = ColumnType.ROOM;
   public cityId: string = "";
@@ -59,9 +67,11 @@ export default class LocationOverviewTable extends Vue {
       .then((res) => {
         this.rooms = res;
         this.GenerateTableObjects(this.rooms);
+        this.loading = false;
       })
       .catch((err) => {
         this.emitter.emit("err", err);
+        this.loading = false;
       });
   }
 

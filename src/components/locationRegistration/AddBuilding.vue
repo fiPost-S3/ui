@@ -1,24 +1,40 @@
 <template>
-  <div class="wrapper">
-    <div class="container-subheader">{{ title }}</div>
-    <ComboBoxInput
-      @selectChange="assignCityToAddress"
-      :options="cities"
-      :selectedOption="selectedCityOption"
-      placeholder="selecteer een stad"
-      label="Stad:"
-    />
+  <div>
+    <div class="wrapper">
+      <LoadingIcon v-if="loading" />
+      <div v-else>
+        <div class="container-subheader">Voeg een gebouw toe</div>
+        <ComboBoxInput
+          @selectChange="assignCityToAddress"
+          :options="cities"
+          placeholder="selecteer een stad"
+          label="Stad:"
+        />
 
-    <InputField label="Gebouw:" v-model:input="building.Name" />
-    <InputField label="Straatnaam:" v-model:input="building.Address.Street" />
-    <InputField label="Huisnummer:" v-model:input="building.Address.Number" />
-    <InputField label="Toevoeging:" v-model:input="building.Address.Addition" />
-    <InputField label="Postcode:" v-model:input="building.Address.PostalCode" />
+        <InputField label="Gebouw:" v-model:input="building.Name" />
+        <InputField
+          label="Straatnaam:"
+          v-model:input="building.Address.Street"
+        />
+        <InputField
+          label="Huisnummer:"
+          v-model:input="building.Address.Number"
+        />
+        <InputField
+          label="Toevoeging:"
+          v-model:input="building.Address.Addition"
+        />
+        <InputField
+          label="Postcode:"
+          v-model:input="building.Address.PostalCode"
+        />
 
-    <SmallBtnFinish text="Bevestigen" v-on:click="addBuilding()" />
-    <transition name="modal" v-if="showModal" close="showModal = false">
-      <link-or-stay-modal link="locaties" @close="showModal = false" />
-    </transition>
+        <SmallBtnFinish text="Bevestigen" v-on:click="addBuilding()" />
+        <transition name="modal" v-if="showModal" close="showModal = false">
+          <link-or-stay-modal link="locaties" @close="showModal = false" />
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,6 +55,7 @@ import { buildingService } from "@/services/locatieService/buildingservice";
 import { cityService } from "@/services/locatieService/cityservice";
 import { getCurrentInstance } from "@vue/runtime-core";
 import SelectOption from "@/classes/helpers/SelectOption";
+import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 
 @Options({
   components: {
@@ -46,6 +63,7 @@ import SelectOption from "@/classes/helpers/SelectOption";
     InputField,
     SmallBtnFinish,
     LinkOrStayModal,
+    LoadingIcon,
   },
   emits: ["location-changed"],
 })
@@ -58,6 +76,7 @@ export default class AddBuilding extends Vue {
 
   private emitter = getCurrentInstance()?.appContext.config.globalProperties
     .emitter;
+  private loading: boolean = true;
   private showModal: boolean = false;
   private cities: Array<SelectOption> = new Array<SelectOption>();
 
@@ -71,7 +90,6 @@ export default class AddBuilding extends Vue {
   );
 
   async created() {
-    
     // Retrieve cities.
     cityService
       .getAll()
@@ -80,9 +98,11 @@ export default class AddBuilding extends Vue {
         this.allCities.forEach((city) =>
           this.cities.push(new SelectOption(city.id, city.name))
         );
+        this.loading = false;
       })
       .catch((err) => {
         this.emitter.emit("err", err);
+        this.loading = false;
       });
 
     if (this.buildingId) {
@@ -143,5 +163,4 @@ export default class AddBuilding extends Vue {
 .wrapper {
   margin-top: 1em;
 }
-
 </style>

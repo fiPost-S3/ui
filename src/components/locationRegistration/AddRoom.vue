@@ -7,6 +7,7 @@
         <CBSearchSuggestion
           @selectChanged="assignBuildingToRoom"
           :options="buildings"
+          :selectedOption="selectedBuildingOption"
           label="Gebouw:"
           :valid="true"
         />
@@ -52,7 +53,6 @@ export default class AddRoom extends Vue {
 
   @Prop()
   private roomId : string = "";
-  private selectedBuildingOption: SelectOption = new SelectOption("","");
 
   @Prop()
   private title: string = "Voeg een nieuwe ruimte toe";
@@ -63,6 +63,7 @@ export default class AddRoom extends Vue {
   private showModal: boolean = false;
   private buildings: Array<SelectOption> = new Array<SelectOption>();
   private allBuildings: Array<Building> = new Array<Building>();
+  private selectedBuildingOption: SelectOption = new SelectOption("","");
 
   private room: RoomRequest = new RoomRequest("", "");
 

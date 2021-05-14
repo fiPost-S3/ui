@@ -42,10 +42,11 @@ import SelectOption from "@/classes/helpers/SelectOption";
 export default class CBSearchSuggestions extends Vue {
 
   @Prop()
-  private selectedOption?: SelectOption;
+  private selectedOption!: SelectOption;
 
-  @Watch('selectedOption')
+  @Watch('selectedOption', { immediate: true, deep: true })
   onPropertyChanged(value: SelectOption, oldValue: SelectOption) {
+    console.log("atesa")
     this.selectedRef.name = value.name;
   }
 
@@ -82,9 +83,6 @@ export default class CBSearchSuggestions extends Vue {
     this.open = true;
   }
 
-  mounted() {
-    this.selectedRef.name = this.placeholder;
-  }
 }
 </script>
 

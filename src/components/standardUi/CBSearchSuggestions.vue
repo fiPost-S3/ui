@@ -46,7 +46,6 @@ export default class CBSearchSuggestions extends Vue {
 
   @Watch('selectedOption', { immediate: true, deep: true })
   onPropertyChanged(value: SelectOption, oldValue: SelectOption) {
-    console.log("atesa")
     this.selectedRef.name = value.name;
   }
 

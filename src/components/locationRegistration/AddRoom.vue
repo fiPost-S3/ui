@@ -20,6 +20,12 @@
         <h4 class="error-text" v-if="error.length > 0">
           {{ error }}
         </h4>
+        <SmallBtnFinish
+          v-if="roomId"
+          text="Delete"
+          :red="true"
+          @click="deleteLocation()"
+        />
         <SmallBtnFinish text="Bevestigen" v-on:click="addRoom" />
         <transition name="modal" v-if="showModal" close="showModal = false">
           <link-or-stay-modal link="locaties" @close="showModal = false" />
@@ -100,6 +106,19 @@ export default class AddRoom extends Vue {
             this.emitter.emit("err", err);
           });
       }
+    }
+  }
+
+  deleteLocation() {
+    if (confirm("Weet je zeker dat je deze locatie wilt verwijderen?")) {
+      roomService
+        .delete(this.roomId)
+        .then(() => {
+          this.$emit("location-changed");
+        })
+        .catch((err: AxiosError) => {
+          this.emitter.emit("err", err);
+        });
     }
   }
 

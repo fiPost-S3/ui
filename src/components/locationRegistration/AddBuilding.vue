@@ -6,6 +6,7 @@
         <div class="container-subheader">{{ title }}</div>
         <ComboBoxInput
           @selectChange="assignCityToAddress"
+          :selectedOption="selectedCityOption"
           :options="cities"
           placeholder="selecteer een stad"
           label="Stad:"
@@ -39,6 +40,13 @@
           v-model:input="building.Address.PostalCode"
           :valid="postalCodeValid"
           @update:input="postalCodeChanged"
+        />
+
+        <SmallBtnFinish
+          v-if="buildingId"
+          text="Delete"
+          :red="true"
+          @click="deleteLocation()"
         />
 
         <h4 class="error-text" v-if="error.length > 0">
@@ -162,12 +170,14 @@ export default class AddBuilding extends Vue {
       this.building.Address.Number = Number(this.building.Address.Number);
 
       if (this.buildingId) {
-        buildingService.update(this.building, this.buildingId).then(() => {
-          this.$emit("location-changed");
-        })
-        .catch((err: AxiosError) => {
-          this.error = err.response?.data;
-        });
+        buildingService
+          .update(this.building, this.buildingId)
+          .then(() => {
+            this.$emit("location-changed");
+          })
+          .catch((err: AxiosError) => {
+            this.error = err.response?.data;
+          });
       } else {
         buildingService
           .post(this.building)
@@ -182,6 +192,19 @@ export default class AddBuilding extends Vue {
     }
   }
 
+  deleteLocation() {
+    if (confirm("Weet je zeker dat je deze locatie wilt verwijderen?")) {
+      buildingService
+        .delete(this.buildingId)
+        .then(() => {
+          this.$emit("location-changed");
+        })
+        .catch((err: AxiosError) => {
+          this.emitter.emit("err", err);
+        });
+    }
+  }
+
   private validate(): boolean {
     this.nameValid = this.building.Name.length > 0;
     this.cityValid =
@@ -189,9 +212,10 @@ export default class AddBuilding extends Vue {
       null;
     this.streetValid = this.building.Address.Street.length > 0;
     this.postalCodeValid = this.building.Address.PostalCode.length > 0;
-    this.numberValid = !isNaN(this.building.Address.Number) 
-    && this.building.Address.Number != null
-    && this.building.Address.Number.toString().length > 0;
+    this.numberValid =
+      !isNaN(this.building.Address.Number) &&
+      this.building.Address.Number != null &&
+      this.building.Address.Number.toString().length > 0;
 
     if (!this.nameValid || !this.streetValid || !this.postalCodeValid) {
       this.error = "Niet alle velden zijn ingevoerd";

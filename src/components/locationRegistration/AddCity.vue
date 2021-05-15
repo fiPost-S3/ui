@@ -1,10 +1,21 @@
 <template>
   <div class="wrapper">
     <div class="container-subheader">{{ title }}</div>
-    <InputField label="Stad:" v-model:input="city.Name" :valid="nameValid" @update:input="nameChanged"/>
+    <InputField
+      label="Stad:"
+      v-model:input="city.Name"
+      :valid="nameValid"
+      @update:input="nameChanged"
+    />
     <h4 class="error-text" v-if="error.length > 0">
       {{ error }}
     </h4>
+    <SmallBtnFinish
+      v-if="cityId"
+      text="Delete"
+      :red="true"
+      @click="deleteLocation()"
+    />
     <SmallBtnFinish text="Bevestigen" v-on:click="addCity" />
     <transition name="modal" v-if="showModal" close="showModal = false">
       <link-or-stay-modal link="locaties" @close="showModal = false" />
@@ -84,6 +95,18 @@ export default class AddCity extends Vue {
     }
   }
 
+  deleteLocation() {
+    if (confirm("Weet je zeker dat je deze locatie wilt verwijderen?")) {
+      cityService
+        .deleteCity(this.cityId)
+        .then(() => {
+          this.$emit("location-changed");
+        })
+        .catch((err: AxiosError) => {
+          this.emitter.emit("err", err);
+        });
+    }
+  }
   nameChanged(input: string): void {
     this.nameValid = this.city.Name.length > 0;
     this.error = "";

@@ -1,9 +1,18 @@
 <template>
+<<<<<<< HEAD
+  <div class="component-container overflow table-container">
+    <table class="table"
+        aria-describedby="Table that displays all packages.">
+      <thead>
+        <tr>
+          <th :id="index" v-for="(column, index) in columns" :key="column">
+=======
   <div class="component-container table-container">
     <table class="table">
       <thead>
         <tr>
           <th v-for="(column, index) in columns" :key="column">
+>>>>>>> a0ed04724e91853d753aa5bcdc82e142ab167e29
             <a href="#" @click="sortBy(columnKeys[index])">
               {{ column }}
               <span v-if="reverse && sortKey == columnKeys[index]">
@@ -99,9 +108,6 @@ export default PakketTable;
 
 .table-container {
   padding: 0 !important;
-  overflow: auto; 
-  width: 100%;
-  height: 100%;
 }
 
 .sort-arrow-defocus {
@@ -114,8 +120,12 @@ export default PakketTable;
 
 .table {
   border-collapse: collapse;
-  width: 100%;
   table-layout: fixed;
+  width: 100%;
+}
+
+thead {
+  width: 100%;
 }
 
 thead tr {
@@ -125,7 +135,6 @@ thead tr {
 tbody tr {
   cursor: pointer;
   overflow: scroll;
-  width: 100%;
 }
 
 th a {

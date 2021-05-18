@@ -1,24 +1,40 @@
 <template>
-  <button :class="red ? 'small-btn-finish red' : 'small-btn-finish purple'" @click="onClick()">
-    {{ text }}
+  <button
+    :class="[red ? 'small-btn-finish red' : 'small-btn-finish purple', disabled ? ' disabled' : '']"
+    @click="onClick()"
+  >
+    <LoadingIcon v-if="isLoading" :isSmall="true"/>
+    <div v-else>
+      {{ text }}
+    </div>
   </button>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 
 @Options({
+  components: {
+    LoadingIcon
+  },
   props: {
     text: String,
-    red: Boolean
+    red: Boolean,
+    isLoading: Boolean,
+    disabled: Boolean
   },
   emits: ["btn-clicked"],
 })
 export default class BtnFinish extends Vue {
   red: Boolean = false;
+  isLoading: Boolean = false;
+  disabled: Boolean = false;
 
   onClick(): void {
-    this.$emit("btn-clicked");
+    if(!this.isLoading && !this.disabled){
+      this.$emit("btn-clicked");
+    }
   }
 }
 </script>
@@ -40,6 +56,11 @@ export default class BtnFinish extends Vue {
 
   font-weight: bold;
   cursor: pointer;
+}
+
+.disabled {
+  box-shadow: inset 0 0 0 50px rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
 }
 
 .purple {

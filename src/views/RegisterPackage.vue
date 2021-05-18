@@ -61,11 +61,13 @@
           :text="btnText"
           :red="btnText == 'Vorige' ? true : false"
           v-on:click="toggleStep"
+          :disabled="loadPostRequest"
         />
         <SmallBtnFinish
           text="Bevestigen"
-          v-on:click="registerPackage"
+          @btn-clicked="registerPackage"
           v-if="overview"
+          :isLoading="loadPostRequest"
         />
       </div>
     </div>
@@ -104,6 +106,7 @@ export default class RegisterPackage extends Vue {
 
   private loadRoom: boolean = true;
   private loadPers: boolean = true;
+  private loadPostRequest: boolean = false;
 
   public fpackage: RegisterPackageModel = new RegisterPackageModel(
     "",
@@ -176,8 +179,17 @@ export default class RegisterPackage extends Vue {
 
   async registerPackage() {
     // Call to backend. Package is filled by emitters.
-    let response = await pakketService.post(this.fpackage);
-    await this.$router.push("/");
+    this.loadPostRequest = true;
+    pakketService
+      .post(this.fpackage)
+      .then((res) => {
+        this.loadPostRequest = false;
+        this.$router.push("/");
+      })
+      .catch((err: AxiosError) => {
+        this.emitter.emit("err", err);
+        this.loadPostRequest = false;
+      });
   }
 
   receiverChanged(input: SelectOption): void {

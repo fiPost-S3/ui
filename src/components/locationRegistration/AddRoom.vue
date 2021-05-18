@@ -26,9 +26,16 @@
             v-if="roomId"
             text="Delete"
             :red="true"
-            @click="deleteLocation()"
+            @btn-clicked="deleteLocation()"
+            :isLoading="loadDeleteRequest"
+            :disabled="loadPostRequest"
           />
-          <SmallBtnFinish text="Bevestigen" v-on:click="addRoom" />
+          <SmallBtnFinish
+            text="Bevestigen"
+            @btn-clicked="addRoom"
+            :isLoading="loadPostRequest"
+            :disabled="loadDeleteRequest"
+          />
           <transition name="modal" v-if="showModal" close="showModal = false">
             <link-or-stay-modal link="locaties" @close="showModal = false" />
           </transition>
@@ -75,6 +82,9 @@ export default class AddRoom extends Vue {
   private emitter = getCurrentInstance()?.appContext.config.globalProperties
     .emitter;
   private loading: boolean = true;
+  private loadPostRequest: boolean = false;
+  private loadDeleteRequest: boolean = false;
+
   private showModal: boolean = false;
   private buildings: Array<SelectOption> = new Array<SelectOption>();
   private allBuildings: Array<Building> = new Array<Building>();
@@ -90,24 +100,30 @@ export default class AddRoom extends Vue {
   }
 
   async addRoom() {
+    this.loadPostRequest = true;
     if (this.validate()) {
       if (this.roomId) {
         roomService
           .update(this.room, this.roomId)
           .then(() => {
+            this.room.Name = "";
+            this.loadPostRequest = false;
             this.$emit("location-changed");
           })
           .catch((err: AxiosError) => {
+            this.loadPostRequest = false;
             this.error = err.response?.data;
           });
       } else {
         roomService
           .post(this.room)
           .then(() => {
-            this.showModal = true;
             this.room.Name = "";
+            this.showModal = true;
+            this.loadPostRequest = false;
           })
           .catch((err: AxiosError) => {
+            this.loadPostRequest = false;
             this.emitter.emit("err", err);
           });
       }
@@ -116,13 +132,16 @@ export default class AddRoom extends Vue {
 
   deleteLocation() {
     if (confirm("Weet je zeker dat je deze locatie wilt verwijderen?")) {
+      this.loadDeleteRequest = true;
       roomService
         .delete(this.roomId)
         .then(() => {
           this.$emit("location-changed");
+          this.loadDeleteRequest = false;
         })
         .catch((err: AxiosError) => {
           this.emitter.emit("err", err);
+          this.loadDeleteRequest = false;
         });
     }
   }
@@ -179,8 +198,8 @@ export default class AddRoom extends Vue {
         this.loading = false;
       })
       .catch((err: AxiosError) => {
-        this.emitter.emit("err", err);
         this.loading = false;
+        this.emitter.emit("err", err);
       });
   }
 }

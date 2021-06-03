@@ -10,4 +10,4 @@ jobs:
     steps:
     
       - run: |
-          CHEESE=${{ secrets.APP_URL }} && echo $CHEESE
+          CHEESE=${{ secrets.APP_URL }} && echo $(CHEESE)

@@ -48,7 +48,22 @@ npm run serve
 ## Getting Started with Docker
 The docker image used in this build uses a Nginx webserver to serve the SPA VueJS content on port `80`.
 
-```zsh
+### Build
+Choose on of the following.
+
+#### Default build
+```sh
 docker build -t ui .
-docker run -p 80:80 --name ui-app ui
+```
+
+#### Custom build
+Replace example.nl with your custom urls.
+
+```sh
+docker build -t ui --build-arg VUE_APPURL=www.example.nl --build-arg VUE_APP_APIGATEWAY=gateway.example.nl .
+```
+
+### Run
+```sh
+docker run -p 8080:80 --name ui-app ui
 ```

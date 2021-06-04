@@ -44,7 +44,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             "VUE_APP_APIGATEWAY=${{ secrets.GATEWAY_URL }}"
-            "VUE_APP_APPURL=${{ secrets.APP_URL }}"
+            "VUE_APPURL=${{ secrets.APP_URL }}"
           
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v2

@@ -4,6 +4,8 @@ WORKDIR /app
 
 ARG VUE_APP_APIGATEWAY="http://localhost:8123"
 ARG VUE_APPURL="http://localhost:8080"
+ENV VUE_APP_API_GATEWAY ${VUE_APP_APIGATEWAY}
+ENV VUE_APP_URL ${VUE_APPURL}
 
 COPY package*.json ./
 RUN npm install
@@ -13,6 +15,8 @@ RUN npm run build
 # production stage
 FROM nginx:stable-alpine as production-stage
 
+ARG VUE_APP_APIGATEWAY="http://localhost:8123"
+ARG VUE_APPURL="http://localhost:8080"
 ENV VUE_APP_API_GATEWAY ${VUE_APP_APIGATEWAY}
 ENV VUE_APP_URL ${VUE_APPURL}
 

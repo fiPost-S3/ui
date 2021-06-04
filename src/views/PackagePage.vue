@@ -1,97 +1,115 @@
 <template>
-    <div>
-        <btn-back/>
-        <div class="page">
-            <div class="pi-item-container">
-                <CreateTicket @new-ticket="reloadTickets" :key="ticketKey"/>
-                <RoutePackageInfo :key="ticketKey" :tickets="tickets"/>
-            </div>
-            <div class="pi-item-container">
-                <PrintQR :packageId="packageId" :address="buildAddressString()"/>
-                <PackageDetails :packageId="packageId" :key="ticketKey"/>
-            </div>
-        </div>
+  <div>
+    <btn-back />
+    <LoadingIcon v-if="isLoading" />
+    <div class="page" v-else>
+      <div class="pi-item-container">
+        <CreateTicket @new-ticket="reloadPage" :fPackage="packageM" />
+        <RoutePackageInfo :tickets="packageM.tickets" />
+      </div>
+      <div class="pi-item-container">
+        <PrintQR :packageId="packageId" :address="buildAddressString()" />
+        <PackageDetails :packageM="packageM" />
+      </div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
-    import {Options, Vue} from "vue-class-component";
-    import PackageDetails from "@/components/packageInfo/PackageDetails.vue";
-    import PrintQR from "@/components/PrintQR.vue";
-    import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
-    import CreateTicket from "@/components/route/CreateTicket.vue";
-    import Ticket from "@/classes/Ticket";
-    import BtnBack from "@/components/standardUi/BtnBack.vue";
-    import {pakketService} from "@/services/pakketService/pakketservice";
-    import Package from "@/classes/Package";
+import { Options, Vue } from "vue-class-component";
+import PackageDetails from "@/components/packageInfo/PackageDetails.vue";
+import PrintQR from "@/components/PrintQR.vue";
+import RoutePackageInfo from "@/components/route/RoutePackageInfo.vue";
+import CreateTicket from "@/components/route/CreateTicket.vue";
+import BtnBack from "@/components/standardUi/BtnBack.vue";
+import Package from "@/classes/Package";
+import { AxiosError } from "axios";
+import { pakketService } from "@/services/pakketService/pakketservice";
+import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 
-    @Options({
-        components: {
-            PackageDetails,
-            PrintQR,
-            RoutePackageInfo,
-            CreateTicket,
-            BtnBack,
-        },
-    })
-    export default class PackagePage extends Vue {
-        private packageId: String = "";
-        private packageM: Package = new Package();
+@Options({
+  components: {
+    PackageDetails,
+    PrintQR,
+    RoutePackageInfo,
+    CreateTicket,
+    BtnBack,
+    LoadingIcon,
+  },
+})
+export default class PackagePage extends Vue {
+  private packageId: String = "";
+  private packageM: Package = new Package();
 
-        private tickets: Ticket[] = [];
-        private isLoading: Boolean = true;
+  private isLoading: Boolean = true;
+  private error: Boolean = false;
 
-        private ticketKey: number = 0;
+  private ticketKey: number = 0;
+  private addressData: String = "";
 
-        private addressData: String = "test";
+  private async reloadPage() {
+    this.isLoading = true;
+    await this.getPackage();
+  }
 
-        private reloadTickets() {
-            this.ticketKey++;
-        }
+  async mounted() {
+    this.packageId = this.$router.currentRoute.value.params.id.toString();
+    await this.getPackage();
+  }
 
-        async mounted() {
-            this.packageId = this.$router.currentRoute.value.params.id.toString();
-            pakketService.get(this.$router.currentRoute.value.params.id).then((res) => {
-                this.packageM = res;
-            });
-        }
+  private async getPackage() {
+    pakketService
+      .get(this.packageId)
+      .then((res) => {
+        this.packageM = res;
+        this.isLoading = false;
+      })
+      .catch((err: AxiosError) => {
+        this.error = true;
+        this.isLoading = false;
+      });
+  }
 
-        buildAddressString() {
-            this.addressData = this.packageM.collectionPoint.building.address.street.toString()
-                + " " +
-                this.packageM.collectionPoint.building.name
-                +", "+
-                this.packageM.collectionPoint.name
-                +" " +
-                this.packageM.collectionPoint.building.address.city.name;
-            return this.addressData;
-        }
+  buildAddressString() {
+    if (this.packageM.collectionPoint) {
+      this.addressData =
+        this.packageM.collectionPoint.building.address.street.toString() +
+        " " +
+        this.packageM.collectionPoint.building.name +
+        ", " +
+        this.packageM.collectionPoint.name +
+        " " +
+        this.packageM.collectionPoint.building.address.city.name;
+      return this.addressData;
     }
+    return "Er ging iets mis bij het ophalen van de locatie";
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-    @import "@/styling/main.scss";
+@import "@/styling/main.scss";
 
-    .page {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 1em;
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1em;
 
-        .pi-item-container {
-            width: 48%;
-            display: flex;
-            flex-direction: column;
-            row-gap: 15px;
-        }
+  .pi-item-container {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+  }
 
-        @media only screen and (max-width: 865px) {
-            flex-direction: column;
-            row-gap: 15px;
+  @media only screen and (max-width: 865px) {
+    flex-direction: column;
+    row-gap: 15px;
 
-            .pi-item-container {
-                width: 90%;
-            }
-        }
+    .pi-item-container {
+      width: 90%;
     }
+  }
+}
 </style>

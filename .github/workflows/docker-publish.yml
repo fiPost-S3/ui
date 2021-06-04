@@ -43,7 +43,7 @@ jobs:
           tags: fipost/ui:${{ env.RELEASE_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            "API_GATEWAY_URL=${{ secrets.GATEWAY_URL }}"
+            "GATEWAY_URL=${{ secrets.GATEWAY_URL }}"
             "APP_URL=${{ secrets.APP_URL }}"
           
       - name: Push to GitHub Packages
@@ -53,5 +53,5 @@ jobs:
           tags: fipost/ui:${{ env.RELEASE_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            "API_GATEWAY_URL=${{ secrets.GATEWAY_URL }}"
+            "GATEWAY_URL=${{ secrets.GATEWAY_URL }}"
             "APP_URL=${{ secrets.APP_URL }}"

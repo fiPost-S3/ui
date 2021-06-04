@@ -85,7 +85,12 @@ export default class PackageDetails extends Vue {
   private deliveryRoom: Room = roomHelper.getEmptyRoom();
 
   async mounted() {
-    this.lastTicketIndex = this.packageM.tickets.length - 1;
+    if (this.packageM.tickets != null) {
+      this.lastTicketIndex = this.packageM.tickets.length - 1;
+    }
+    else{
+      this.lastTicketIndex = -1;
+    }
   }
 
   private getDateString() {

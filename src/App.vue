@@ -41,6 +41,7 @@ export default class App extends Vue {
 
   async mounted() {
     console.log("APP-url",process.env.VUE_APP_URL);
+    console.log("API-url",process.env.VUE_APP_API_GATEWAY);
     this.emitter.on("err", (err: AxiosError) => {
       if(err.response != null){
         if(err.response.status == 500 || err.response.status == 404 || err.response.status == 400){

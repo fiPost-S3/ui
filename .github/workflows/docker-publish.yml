@@ -40,7 +40,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: fipost/ui:0.0.7.1
+          tags: fipost/ui:$RELEASE_VERSION
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             "VUE_APP_APIGATEWAY=${{ secrets.GATEWAY_URL }}"
@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: fipost/ui:0.0.7.1
+          tags: fipost/ui:$RELEASE_VERSION
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             "VUE_APP_APIGATEWAY=${{ secrets.GATEWAY_URL }}"

@@ -3,8 +3,11 @@
 ![ipost-logo](https://github.com/FIPost/docs/blob/master/assets/logo-name.png?raw=true)
 
 # ui
-<h3 align="center">
+<h3>
   <a href="https://github.com/FIPost/docs">Documentation</a>
+</h3>
+<h3>
+  <a href="https://github.com/FIPost/docs/wiki/Node">Wiki</a>
 </h3>
 
 VueJS front-end for the logistal process of managing packages.

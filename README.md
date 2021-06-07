@@ -1,15 +1,17 @@
 [![Publish Docker image](https://github.com/FIPost/ui/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/FIPost/ui/actions/workflows/docker-publish.yml)
 [![Build image](https://github.com/FIPost/ui/actions/workflows/build.yml/badge.svg)](https://github.com/FIPost/ui/actions/workflows/build.yml)
 ![ipost-logo](https://github.com/FIPost/docs/blob/master/assets/logo-name.png?raw=true)
-
-# ui
-<h3>
+<h3 align="middle">
   <a href="https://github.com/FIPost/docs">Documentation</a>
-</h3>
-<h3>
-  <a href="https://github.com/FIPost/docs/wiki/Node">Wiki</a>
+  <a>•</a>
+  <a href="https://github.com/FIPost/docs/wiki/.NET">Wiki</a>
+  <a>•</a>
+  <a href="https://github.com/FIPost/docs/blob/master/CONTRIBUTING.md">Contributing</a>
+  <a>•</a>
+  <a href="https://github.com/FIPost/docs/blob/master/CONTACT.md">Contact</a>
 </h3>
 
+# UI
 VueJS front-end for the logistal process of managing packages.
 
 ## Getting Started

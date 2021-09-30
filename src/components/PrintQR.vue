@@ -212,22 +212,29 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default class PrintQR extends Vue {
   @Prop() public packageId: String = "";
-  @Prop() public address: String = "";
-  @Prop() public name: String = "";
+  @Prop() public receiversAddress1: String = "";
+  @Prop() public receiversAddress2: String = "";
+  @Prop() public receiversName: String = "";
+  @Prop() public sendersName: String = "";
 
   onClick(): void {
-    const address = this.address;
+    const receiversAddress1 = this.receiversAddress1;
+    const receiversAddress2 = this.receiversAddress2;
+    const receiversName = this.receiversName;
+    const sendersName = this.sendersName;
     const dd = {
       content: [
+        //{Image:  },
         { qr: this.getPackageURL(), margin: [155, 6, 0, 0] },
-         { text: "____________________________________________________", style: "default", margin: [90, 40, 0, 0] },
-        { text: "Naam ontvanger: ", style: "default", margin: [0, 40, 0, 0] },
-        { text: "Bezorg adres: ", style: "default", margin: [0, 6, 0, 0] },
-        
-        
+         { text: "____________________________________________________", style: "default", margin: [85, 40, 0, 0] },
+        { text: "Naam ontvanger: ", style: "default", margin: [0, 30, 0, 0] },
+        { text: receiversName, style: "default" },
+        { text: "Bezorg adres: ", style: "default", margin: [0, 30, 0, 0] },                   
+        { text: receiversAddress1, style: "default" },
+        { text: receiversAddress2, style: "default" },
         "\n",
-        { text: address, style: "default" },
-        { text: address, style: "default" },
+        { text: "Naam afzender: ", style: "default", margin: [0, 30, 0, 0] },
+        { text: sendersName, style: "default" },
       ],
       styles: {
         default: {
@@ -259,6 +266,8 @@ export default class PrintQR extends Vue {
   border-radius: $border-radius;
   cursor: pointer;
 }
+
+ 
 
 .text {
   width: 55%;

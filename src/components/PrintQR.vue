@@ -213,14 +213,20 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default class PrintQR extends Vue {
   @Prop() public packageId: String = "";
   @Prop() public address: String = "";
+  @Prop() public name: String = "";
 
   onClick(): void {
     const address = this.address;
     const dd = {
       content: [
-        { qr: this.getPackageURL() },
-        { text: "Eindbestemming: ", style: "default", margin: [0, 6, 0, 0] },
+        { qr: this.getPackageURL(), margin: [155, 6, 0, 0] },
+         { text: "____________________________________________________", style: "default", margin: [90, 40, 0, 0] },
+        { text: "Naam ontvanger: ", style: "default", margin: [0, 40, 0, 0] },
+        { text: "Bezorg adres: ", style: "default", margin: [0, 6, 0, 0] },
+        
+        
         "\n",
+        { text: address, style: "default" },
         { text: address, style: "default" },
       ],
       styles: {

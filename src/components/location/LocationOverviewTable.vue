@@ -2,10 +2,15 @@
   <div>
     <LoadingIcon v-if="loading" />
     <div v-else>
-      <TableComponent
+     
+     <!-- <TableComponent
         :items="items"
         :editable="true"
         @cell-clicked="CellClicked"
+      />  -->
+      <LocationTable
+        :items="items"
+        @row-clicked="RowClicked"
       />
       <Pagination
         v-if="allRooms.length > visibleItemsPerPageCount"
@@ -42,7 +47,7 @@ import { AxiosError } from "axios";
 import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 import { TableCell } from "@/classes/table/TableCell";
 import Pagination from "@/components/standardUi/Pagination/BasePagination.vue";
-
+import LocationTable from "@/components/location/LocationTable.vue";
 @Options({
   components: {
     Pagination,
@@ -50,6 +55,7 @@ import Pagination from "@/components/standardUi/Pagination/BasePagination.vue";
     LoadingIcon,
     LocationInfo,
     LocationModal,
+    LocationTable
   },
 })
 export default class LocationOverviewTable extends Vue {
@@ -98,6 +104,14 @@ export default class LocationOverviewTable extends Vue {
         this.loading = false;
       });
   }
+
+public RowClicked(id: string){
+    console.log("row-clicked: " + id);
+    this.roomId = id;
+    this.modalOpen = true;
+
+}
+
 
   public CellClicked(cell: TableCell): void {
     if (cell) {

@@ -129,6 +129,7 @@ export default class AddBuilding extends Vue {
   private postalCodeValid: boolean = true;
   private numberValid: boolean = true;
   private error: string = "";
+  
 
   async created() {
     if (this.buildingId) {
@@ -226,19 +227,19 @@ export default class AddBuilding extends Vue {
   }
 
   private validate(): boolean {
-    this.nameValid = this.building.Name.length > 0;
+    this.nameValid;
     this.cityValid =
       this.allCities.find((city) => city.id == this.building.Address.CityId) !=
       null;
-    this.streetValid = this.building.Address.Street.length > 0;
-    this.postalCodeValid = this.building.Address.PostalCode.length > 0;
+    this.streetValid;
+    this.postalCodeValid;
     this.numberValid =
       !isNaN(this.building.Address.Number) &&
       this.building.Address.Number != null &&
       this.building.Address.Number.toString().length > 0;
 
     if (!this.nameValid || !this.streetValid || !this.postalCodeValid) {
-      this.error = "Niet alle velden zijn ingevoerd";
+      this.error = "Niet alle velden zijn correct ingevult";
       return false;
     }
 
@@ -265,7 +266,8 @@ export default class AddBuilding extends Vue {
   }
 
   postalCodeChanged(input: string): void {
-    this.postalCodeValid = this.building.Address.PostalCode.length > 0;
+    this.postalCodeValid = this.building.Address.PostalCode.length === 6;
+    this.building.Address.PostalCode = this.building.Address.PostalCode.toUpperCase();
     this.error = "";
   }
 

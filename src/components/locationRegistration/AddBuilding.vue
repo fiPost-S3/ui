@@ -239,7 +239,7 @@ export default class AddBuilding extends Vue {
       this.building.Address.Number.toString().length > 0;
 
     if (!this.nameValid || !this.streetValid || !this.postalCodeValid) {
-      this.error = "Niet alle velden zijn correct ingevult";
+      this.error = "Niet alle velden zijn correct ingevuld";
       return false;
     }
 

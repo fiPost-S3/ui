@@ -218,6 +218,7 @@ export default class PrintQR extends Vue {
   @Prop() public sendersName: String = "";
 
   onClick(): void {
+
     const receiversAddress1 = this.receiversAddress1;
     const receiversAddress2 = this.receiversAddress2;
     const receiversName = this.receiversName;
@@ -225,16 +226,17 @@ export default class PrintQR extends Vue {
     const dd = {
       content: [
         //{Image:  },
-        { qr: this.getPackageURL(), margin: [155, 6, 0, 0] },
-         { text: "____________________________________________________", style: "default", margin: [85, 40, 0, 0] },
-        { text: "Naam ontvanger: ", style: "default", margin: [0, 30, 0, 0] },
-        { text: receiversName, style: "default" },
-        { text: "Bezorg adres: ", style: "default", margin: [0, 30, 0, 0] },                   
-        { text: receiversAddress1, style: "default" },
-        { text: receiversAddress2, style: "default" },
+        { qr: this.getPackageURL(), margin: [320, 30, 0, 0] },
+         { text: "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _", style: "default", margin: [0, 40, 0, 0] },
+        { text: "Naam ontvanger: ", style: "default", margin: [30, -220, 0, 0] },
+        { text: receiversName, style: "default", margin: [30, 0 , 0, 0] },
         "\n",
-        { text: "Naam afzender: ", style: "default", margin: [0, 30, 0, 0] },
-        { text: sendersName, style: "default" },
+        { text: "Bezorg adres: ", style: "default", margin: [30, 0, 0, 0] },                   
+        { text: receiversAddress1, style: "default", margin: [30, 0, 0, 0] },
+        { text: receiversAddress2, style: "default", margin: [30, 0, 0, 0] },
+        "\n",
+        { text: "Naam afzender: ", style: "default", margin: [30, 0, 0, 0] },
+        { text: sendersName, style: "default", margin: [30, 0, 0, 0] },
       ],
       styles: {
         default: {
@@ -242,7 +244,8 @@ export default class PrintQR extends Vue {
         },
       },
     };
-    pdfMake.createPdf(dd).open({}, window);
+    pdfMake.createPdf(dd).open({}, window.open("_blank"));
+    
   }
 
   getPackageURL() {

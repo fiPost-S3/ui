@@ -176,6 +176,10 @@ export default class AddBuilding extends Vue {
     this.building.Address.CityId = option.id;
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   addBuilding() {
     this.loadPostRequest = true;
     if (this.validate()) {
@@ -256,11 +260,13 @@ export default class AddBuilding extends Vue {
   }
 
   nameChanged(input: string): void {
+    this.building.Name = this.capitalizeFirstLetter(this.building.Name);
     this.nameValid = this.building.Name.length > 0;
     this.error = "";
   }
 
   streetChanged(input: string): void {
+    this.building.Address.Street = this.capitalizeFirstLetter(this.building.Address.Street);
     this.streetValid = this.building.Address.Street.length > 0;
     this.error = "";
   }

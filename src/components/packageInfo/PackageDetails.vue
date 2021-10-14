@@ -5,7 +5,7 @@
 
       <div class="details-wrapper">
         <div class="pd-content">
-          <div class="container-subheader-small">Omschrijving</div>
+          <div class="container-subheader-small">Pakketnaam</div>
           <div class="pd-item">{{ packageM.name }}</div>
         </div>
 

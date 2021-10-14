@@ -111,6 +111,10 @@ export default class AddCity extends Vue {
     }
   }
 
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   private validate(): boolean {
     this.nameValid = this.city.Name.length > 0;
     if (this.nameValid) {
@@ -138,6 +142,7 @@ export default class AddCity extends Vue {
     }
   }
   nameChanged(input: string): void {
+    this.city.Name = this.capitalizeFirstLetter(this.city.Name);
     this.nameValid = this.city.Name.length > 0;
     this.error = "";
   }

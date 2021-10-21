@@ -3,13 +3,6 @@
     <LoadingIcon v-if="isLoading" />
     <div v-else>
       <div class="container-subheader">{{ title }}</div>
-      <CBSearchSuggestion
-          @selectChanged="assignCityToRoom"
-          :options="cities"
-          :selectedOption="selectedCityOption"
-          label="Stad:"
-          :valid="cityValid"
-        />
       <InputField
         label="Stad:"
         v-model:input="city.Name"
@@ -118,8 +111,6 @@ export default class AddCity extends Vue {
     }
   }
 
-  
-
   private validate(): boolean {
     this.nameValid = this.city.Name.length > 0;
     if (this.nameValid) {
@@ -154,9 +145,7 @@ export default class AddCity extends Vue {
   async mounted() {
     if (this.cityId) {
       this.isLoading = true;
-      console.log("getcity" + this.cityId);
       cityService.getById(this.cityId).then((res) => {
-        
         this.city = new CityRequest(res.name);
         this.isLoading = false;
       });

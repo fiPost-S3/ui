@@ -13,6 +13,11 @@ export default class BuildingService {
     return response.data;
   }
 
+  public async getAllByCity(id): Promise<Array<Building>> {
+    const response = await http.get(`/api/locations/buildings/city/${id}`);
+    return response.data;
+  }
+
   public async getById(id): Promise<Building> {
     const response = await http.get(`/api/locations/buildings/${id}`);
     return response.data;

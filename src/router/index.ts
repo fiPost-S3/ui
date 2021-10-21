@@ -5,8 +5,7 @@ import PakketOverzicht from "@/views/PakketOverzicht.vue";
 import PackagePage from "@/views/PackagePage.vue";
 import AddLocation from "@/views/AddLocation.vue";
 import LocationOverview from "@/views/LocationOverview.vue";
-import CityOverview from "@/components/location/CityOverview.vue";
-// import BuildingOverview from "@/components/location/BuildingOverview.vue";
+import CityOverview from "@/components/location/CityOverview.vue"; import BuildingOverview from "@/components/location/BuildingOverview.vue";
 const routes = [
     {
         path: "/registratie",
@@ -43,11 +42,11 @@ const routes = [
         name: "Steden Overzicht",
         component: CityOverview
     },
-    // {
-    //     path: "/locaties/gebouwen",
-    //     name: "Gebouwen Overzicht",
-    //     component: BuildingOverview
-    // },
+    {
+        path: "/locaties/gebouwen",
+        name: "Gebouwen Overzicht",
+        component: BuildingOverview
+    },
 
 ];
 

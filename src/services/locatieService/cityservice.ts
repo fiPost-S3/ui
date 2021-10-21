@@ -14,6 +14,7 @@ export default class CityService {
   }
 
   public async getById(id: string): Promise<City> {
+    console.log(id);
     const response = await http.get(`/api/locations/cities/${id}`);
     return response.data;
   }

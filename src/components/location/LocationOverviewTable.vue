@@ -9,7 +9,9 @@
         @cell-clicked="CellClicked"
       />  -->
       <LocationTable
-        :items="items"
+        :allItems="allItems"
+        :firstItem="firstItem"
+        :lastItem="lastItem"
         @row-clicked="RowClicked"
       />
       <Pagination
@@ -67,6 +69,8 @@ export default class LocationOverviewTable extends Vue {
   public cityId: string = "";
   public buildingId: string = "";
   public roomId: string = "";
+  public firstItem;
+  public lastItem;
 
   public modalOpen: boolean = false;
   public CloseModal(): void {
@@ -74,14 +78,13 @@ export default class LocationOverviewTable extends Vue {
   }
 
   /* LocationTable */
-  private items: Array<Object> = new Array<Object>();
+  private allItems: Array<Object> = new Array<Object>();
   private allRooms: Array<Room> = new Array<Room>();
-  private rooms: Array<Room> = new Array<Room>();
 
   private emitter = getCurrentInstance()?.appContext.config.globalProperties
     .emitter;
 
-  private visibleItemsPerPageCount = 10;
+  private visibleItemsPerPageCount = 8;
   private pageCount = 0;
 
   beforeMount() {
@@ -131,10 +134,10 @@ public RowClicked(id: string){
   }
 
   //Format objects to display in the table
-  GenerateTableObjects(rooms: Room[]) {
-    this.items = new Array<Object>();
-    rooms.forEach((value) => {
-      this.items.push({
+   GenerateAllTableObjects(allrooms : Room[]) {
+   this.allItems = new Array<Object>();
+    allrooms.forEach((value) => {
+      this.allItems.push({
         Stad: {
           id: value.building.address.city.id,
           displayName: value.building.address.city.name,
@@ -157,21 +160,19 @@ public RowClicked(id: string){
         } as TableCell,
       });
     });
-  }
+   }
 
   ReloadTable(): void {
-    this.items = [];
+    this.allItems = [];
     this.modalOpen = false;
     this.GetRooms();
   }
 
   public loadPage(value: number) {
-    const pageIndex = (value - 1) * this.visibleItemsPerPageCount;
-    this.rooms = this.allRooms.slice(
-      pageIndex,
-      pageIndex + this.visibleItemsPerPageCount
-    );
-    this.GenerateTableObjects(this.rooms);
+    this.firstItem = value * this.visibleItemsPerPageCount - this.visibleItemsPerPageCount;    
+    this.lastItem = value * this.visibleItemsPerPageCount;
+    //this.GenerateTableObjects(this.rooms);
+    this.GenerateAllTableObjects(this.allRooms);
   }
 }
 </script>

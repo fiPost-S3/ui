@@ -8,6 +8,7 @@
         :editable="true"
         @cell-clicked="CellClicked"
       />  -->
+      
       <LocationTable
         :allItems="allItems"
         :firstItem="firstItem"

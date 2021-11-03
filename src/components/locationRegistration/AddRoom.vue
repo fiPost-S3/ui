@@ -161,6 +161,7 @@ export default class AddRoom extends Vue {
     }
   }
 
+
   deleteLocation() {
     if (confirm("Weet je zeker dat je deze locatie wilt verwijderen?")) {
       this.loadDeleteRequest = true;
@@ -262,6 +263,8 @@ export default class AddRoom extends Vue {
         this.loading = false;
         this.emitter.emit("err", err);
       });
+
+      
   }
 }
 </script>

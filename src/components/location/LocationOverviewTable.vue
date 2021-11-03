@@ -108,12 +108,12 @@ export default class LocationOverviewTable extends Vue {
       });
   }
 
-public RowClicked(id: string){
+  public RowClicked(id: string) {
     console.log("row-clicked: " + id);
     this.roomId = id;
     this.modalOpen = true;
-
-}
+    console.log(this.items);
+  }
 
 
   public CellClicked(cell: TableCell): void {
@@ -178,5 +178,5 @@ public RowClicked(id: string){
 </script>
 
 <style lang="scss" scoped>
-@import "@/styling/main.scss";
+  @import "@/styling/main.scss";
 </style>

@@ -7,14 +7,17 @@
 
       <div class="search-fields">
         <Search @valueChanged="valueChanged" />
-        <ComboBox :options="options" placeholder="Selecteer een veld" />
+        <!-- <ComboBox :options="options" placeholder="Selecteer een veld" />
         <font-awesome-icon
           @click="goToAddLocationPage()"
           class="plus-location"
           icon="plus-square"
-        />
-        
-        
+        /> -->
+        <button 
+        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+         @click="goToLocationOverview()">
+         Locaties
+        </button>
         <button 
         :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
          @click="goToCityOverview()">
@@ -33,20 +36,20 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Search from "./Search.vue";
-import ComboBox from "@/components/standardUi/ComboBox.vue";
+// import ComboBox from "@/components/standardUi/ComboBox.vue";
 
 const SearchContainer = defineComponent({
   components: {
     Search,
-    ComboBox,
+    // ComboBox,
   },
   methods: {
     valueChanged(val) {
       // Needs implementation.
       console.log(val);
     },
-    goToAddLocationPage() {
-      this.$router.push("/locaties/nieuw");
+    goToLocationOverview() {
+      this.$router.push("/locaties");
     },
     goToCityOverview(){
       this.$router.push("/locaties/steden");
@@ -139,5 +142,8 @@ export default SearchContainer;
 }
 .purple {
   background: $modern-purple-color;
+}
+.green{
+  background: darkgreen;
 }
 </style>

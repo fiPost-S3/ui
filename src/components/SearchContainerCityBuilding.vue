@@ -13,7 +13,21 @@
           class="plus-location"
           icon="plus-square"
         /> -->
-        
+        <button 
+        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+         @click="goToLocationOverview()">
+         Locaties
+        </button>
+        <button 
+        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+         @click="goToCityOverview()">
+         Steden
+        </button>
+        <button 
+        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+         @click="goToBuildingOverview()">
+         Gebouwen
+        </button>
       </div>
     </div>
   </div>
@@ -34,10 +48,15 @@ const SearchContainer = defineComponent({
       // Needs implementation.
       console.log(val);
     },
-    goToAddLocationPage() {
-      this.$router.push("/locaties/nieuw");
+    goToLocationOverview() {
+      this.$router.push("/locaties");
     },
-    
+    goToCityOverview(){
+      this.$router.push("/locaties/steden");
+    },
+    goToBuildingOverview(){
+      this.$router.push("/locaties/gebouwen");
+    }
   },
   data() {
     return {
@@ -123,5 +142,8 @@ export default SearchContainer;
 }
 .purple {
   background: $modern-purple-color;
+}
+.green{
+  background: darkgreen;
 }
 </style>

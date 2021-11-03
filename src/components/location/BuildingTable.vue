@@ -118,6 +118,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   table-layout: fixed;
+
 }
 
 thead tr {
@@ -138,6 +139,7 @@ table td,
 th {
   padding: 0.75em !important;
   width: 350px;
+  height: 20px;
 }
 
 td:first-child {

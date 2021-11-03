@@ -1,7 +1,7 @@
 <template>
     <btn-back />
     <h1>Gebouwen Overzicht</h1>
-    <SearchContainerCityBuilding />
+    <SearchContainerBuilding />
     <BuildingOverviewTable/>
     
 </template>
@@ -11,7 +11,7 @@ import { Options, Vue } from "vue-class-component";
 import BtnBack from "@/components/standardUi/BtnBack.vue";
 import BuildingOverviewTable from "@/components/location/BuildingOverviewTable.vue";
 import SearchContainerLocation from "@/components/SearchContainerLocation.vue";
-import SearchContainerCityBuilding from "@/components/SearchContainerCityBuilding.vue";
+import SearchContainerBuilding from "@/components/SearchContainerBuilding.vue";
 import LocationOverviewTable from "@/components/location/LocationOverviewTable.vue";
 @Options({
   components: {
@@ -19,7 +19,7 @@ import LocationOverviewTable from "@/components/location/LocationOverviewTable.v
     LocationOverviewTable,
     BuildingOverviewTable,
     SearchContainerLocation,
-    SearchContainerCityBuilding
+    SearchContainerBuilding
   },
 })
 export default class BuildingOverview extends Vue {}

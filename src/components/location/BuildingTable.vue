@@ -1,5 +1,6 @@
 <template>
      <div class="component-container overflow table-container">
+     
     <table class="table" aria-describedby="Data table">
       <thead>
         <tr>
@@ -21,13 +22,14 @@
       <tbody>
         <tr v-for="entry in filteredItems" :key="entry" class="hoverElement" >
             
-          <td @click="$emit('row-clicked', entry.Gebouw.id)"
+          <td @click="$emit('building-clicked', entry.Gebouw.id)"
             v-for="cell in entry"
             :key="cell"
           >
             {{ cell.displayName}} 
           </td>
-          <td class="editColumn" @click="$emit('row-clicked', entry.Gebouw.id)">
+          <td class="editColumn" @click="$emit('building-clicked', entry.Gebouw.id)">
+            
               <span class="hide" />
               
           </td>
@@ -52,7 +54,8 @@ export default class TableComponent extends Vue {
   private sortKey: number = 0;
 
   @Emit("cell-clicked")
-  @Emit("row-clicked")
+  @Emit("building-clicked")
+  
 
 ClickedTest(){
     console.log("clicked");

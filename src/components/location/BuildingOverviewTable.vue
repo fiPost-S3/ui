@@ -11,10 +11,10 @@
       
       <BuildingTable
         :items="items"
-        @row-clicked="RowClicked"
+        @building-clicked="BuildingClicked"
       />
       <Pagination
-        v-if="allCities.length > visibleItemsPerPageCount"
+        v-if="allBuildings.length > visibleItemsPerPageCount"
         :page-count="pageCount"
         :visible-items-per-page-count="visibleItemsPerPageCount"
         :visible-pages-count="Math.min(pageCount, 5)"
@@ -26,7 +26,7 @@
       <BuildingModal v-if="modalOpen" @close-location="CloseModal()">
         <BuildingInfo
           :ColumnType="ColumnType"
-          :cityId="cityId"
+          :buildingId="buildingId"
           @reload-table="ReloadTable"
         />
       </BuildingModal>
@@ -48,7 +48,7 @@ import { AxiosError } from "axios";
 import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 import { TableCell } from "@/classes/table/TableCell";
 import Pagination from "@/components/standardUi/Pagination/BasePagination.vue";
-import BuildingTable from "@/components/location/CityTable.vue";
+import BuildingTable from "@/components/location/BuildingTable.vue";
 import { buildingService } from "@/services/locatieService/buildingservice";
 @Options({
   components: {
@@ -89,8 +89,9 @@ export default class BuildingOverviewTable extends Vue {
   private pageCount = 0;
 
   beforeMount() {
-    this.GetRooms();
+    
     this.GetBuildings();
+    console.log("mount building table")
   }
 
   async GetRooms() {
@@ -126,32 +127,31 @@ export default class BuildingOverviewTable extends Vue {
     });
   }
 
-public RowClicked(id: string){
-    console.log("row-clicked: " + id);
+public BuildingClicked(id: string){
+    console.log("building-clicked: " + id);
     // this.roomId = id;
     this.buildingId = id;
-    console.log("this.buildingid= " + this.buildingId)
+    console.log("this.buildingid = " + this.buildingId)
     this.modalOpen = true;
-
 }
 
 
-  public CellClicked(cell: TableCell): void {
-    if (cell) {
-      this.ColumnType = cell.type as ColumnType;
+  // public CellClicked(cell: TableCell): void {
+  //   if (cell) {
+  //     this.ColumnType = cell.type as ColumnType;
 
-      if (this.ColumnType == ColumnType.CITY) {
-        this.cityId = cell.id;
-      } else if (this.ColumnType == ColumnType.BUILDING) {
-        this.buildingId = cell.id;
-      } else if (this.ColumnType == ColumnType.ROOM) {
-        this.roomId = cell.id;
-      } else {
-        return;
-      }
-      this.modalOpen = true;
-    }
-  }
+  //     if (this.ColumnType == ColumnType.CITY) {
+  //       this.cityId = cell.id;
+  //     } else if (this.ColumnType == ColumnType.BUILDING) {
+  //       this.buildingId = cell.id;
+  //     } else if (this.ColumnType == ColumnType.ROOM) {
+  //       this.roomId = cell.id;
+  //     } else {
+  //       return;
+  //     }
+  //     this.modalOpen = true;
+  //   }
+  // }
 
   //Format objects to display in the table
 GenerateTableObjects(buildings: Building[]){
@@ -161,6 +161,7 @@ GenerateTableObjects(buildings: Building[]){
       Gebouw: {
         id: value.id,
         displayName: value.name,
+        displayadres: value.address,
         type: ColumnType.BUILDING,
       } as TableCell,
     });

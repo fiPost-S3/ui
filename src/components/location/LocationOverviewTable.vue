@@ -113,7 +113,7 @@ export default class LocationOverviewTable extends Vue {
     console.log("row-clicked: " + id);
     this.roomId = id;
     this.modalOpen = true;
-    console.log(this.items);
+    console.log(this.allItems);
   }
 
 

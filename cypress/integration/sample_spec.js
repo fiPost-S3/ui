@@ -37,5 +37,9 @@ describe('My First Test', () => {
         //     '</path>').click()
 
         cy.get('.custom-select').click()
+
+        cy.contains('Stad').click()
+
+        cy.request('https://localhost:44311/api/locations/rooms')
     })
-})
+});

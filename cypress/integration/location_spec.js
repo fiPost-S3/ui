@@ -101,15 +101,15 @@ describe('Add + delete Building', () => {
         cy.get('#app > div.page-wrapper > div > div:nth-child(4) > div > div > div.input-container > input').type('Cypress');
 
         cy.contains('Bevestigen').click();
-        // cy.contains('Bevestigen').click();
-        // cy.contains('Naar overzicht').click();
-        //
-        // cy.contains('Steden').click();
-        //
-        // cy.contains('Cypress').click();
-        //
-        // cy.contains('Delete').click();
-        //
-        // cy.contains('Cypress').should('not.exist');
+
+        cy.contains('Naar overzicht').click();
+
+        cy.contains('Steden').click();
+
+        cy.contains('Cypress').click();
+
+        cy.contains('Delete').click();
+
+        cy.contains('Cypress').should('not.exist');
     })
 });

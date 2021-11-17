@@ -66,7 +66,7 @@ describe('Add + delete Building', () => {
             .contains('Cypress').click();
 
         cy.get('.input-container').first()
-            .type('Cypress')
+            .type('Cypress2')
             .next().type('TestStraat')
             .next().type('6')
             .next()
@@ -89,9 +89,18 @@ describe('Add + delete Building', () => {
         //     .next().click();
 
         cy.get('#app > div.page-wrapper > div > div:nth-child(4) > div > div > div:nth-child(2) > div').click();
+        cy.wait(500);
         cy.contains('Cypress').click();
 
-        cy.get('#app > div.page-wrapper > div > div:nth-child(4) > div > div > div:nth-child(3) > div').click();
+        cy.wait(500);
+        cy.get('#app > div.page-wrapper');
+        cy.get('#app > div.page-wrapper > div > div:nth-child(4) > div > div > div:nth-child(3) > div > input').click();
+        cy.wait(500);
+        cy.contains('Cypress2').click({force:true});
+
+        cy.get('#app > div.page-wrapper > div > div:nth-child(4) > div > div > div.input-container > input').type('Cypress');
+
+        cy.contains('Bevestigen').click();
         // cy.contains('Bevestigen').click();
         // cy.contains('Naar overzicht').click();
         //

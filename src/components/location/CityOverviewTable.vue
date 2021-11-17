@@ -85,7 +85,7 @@ export default class CityOverviewTable extends Vue {
   private emitter = getCurrentInstance()?.appContext.config.globalProperties
     .emitter;
 
-  private visibleItemsPerPageCount = 10;
+  private visibleItemsPerPageCount = 20;
   private pageCount = 0;
 
   beforeMount() {

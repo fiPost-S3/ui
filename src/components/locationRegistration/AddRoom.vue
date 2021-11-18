@@ -6,6 +6,7 @@
         <div class="container-subheader">{{ title }}</div>
         <CBSearchSuggestion
           @selectChanged="assignCityToRoom"
+          @change="buildingcbx.input = ''"
           :options="cities"
           :selectedOption="selectedCityOption"
           label="Stad:"
@@ -123,6 +124,9 @@ export default class AddRoom extends Vue {
       this.getAllByCity(this.cityId);
     }
     else {
+      this.selectedBuildingOption = new SelectOption(
+          '',''
+        );
       this.cityId = option.id;
       this.getAllByCity(this.cityId);
     }

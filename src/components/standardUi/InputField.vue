@@ -2,11 +2,20 @@
   <div class="input-container">
     <p class="header">{{ label }}</p>
     <input
+        :class="cssClass"
+        type="password"
+        :value="input"
+        @keyup="$emit('update:input', $event.target.value)"
+        v-if="label === 'Wachtwoord:'"
+    />
+    <input
       :class="cssClass"
       type="text"
       :value="input"
       @keyup="$emit('update:input', $event.target.value)"
+      v-else
     />
+
   </div>
 </template>
 

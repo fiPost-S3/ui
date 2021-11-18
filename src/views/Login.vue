@@ -23,7 +23,7 @@
         <SmallBtnFinish
           :text="btnText"
           :red="btnText === 'Opnieuw' ? true : false"
-          v-on:click="toggleStep"       
+          v-on:click="toggleStep"
         />
       </div>
     </div>
@@ -38,6 +38,7 @@ import InputField from "@/components/standardUi/InputField.vue";
 import SmallBtnFinish from "@/components/standardUi/SmallBtnFinish.vue";
 import CBSearchSuggestions from "@/components/standardUi/CBSearchSuggestions.vue";
 import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
+import axios from "axios";
 
 
 
@@ -52,7 +53,7 @@ import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 })
 export default class RegisterPackage extends Vue {
 
-    errorText; 
+    errorText;
     private error: string[] = ["Niet alle velden zijn ingevuld"];
     private email: string = "";
     private password: string = "";
@@ -61,21 +62,30 @@ export default class RegisterPackage extends Vue {
 
 
     toggleStep() {
-    // Clear errors
-    this.errorText = false;
-    this.error = [];
+      // Clear errors
+      this.errorText = false;
+      this.error = [];
 
+      // Validate if fields have values.
+      if (this.email === "" || this.password === "") {
+        this.errorText = true;
+        this.error.push("Niet alle velden zijn ingevuld.");
+      }
+      else{
+        //execute login code
+        axios.post('https://localhost:44369/api/Authentication/login', {
+          email: this.email,
+          password: this.password
+        }) .then(function (response) {
+          localStorage.setItem('token', response.data);
+        })
+      }
 
-
-    // Validate if fields have values.
-    if (this.email === "" || this.password === "") {
-      this.errorText = true;
-      this.error.push("Niet alle velden zijn ingevuld.");
-    }
-      if (this.errorText) {     
+      if (this.errorText) {
         this.btnText = "Opnieuw";
       }
-  }
+
+    }
 }
 
 </script>

@@ -6,6 +6,7 @@ import PackagePage from "@/views/PackagePage.vue";
 import AddLocation from "@/views/AddLocation.vue";
 import LocationOverview from "@/views/LocationOverview.vue";
 import Login from "@/views/Login.vue";
+import SignUp from "@/views/Sign-up.vue";
 import CityOverview from "@/components/location/CityOverview.vue"; import BuildingOverview from "@/components/location/BuildingOverview.vue";
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
         path: "/login",
         name: "Login",
         component: Login,
+    },
+    {
+        path: "/sign-up",
+        name: "SignUp",
+        component: SignUp,
     },
     {
         path: "/",

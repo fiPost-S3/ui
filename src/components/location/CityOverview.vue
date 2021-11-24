@@ -1,7 +1,7 @@
 <template>
     <btn-back />
     <h1>Steden Overzicht</h1>
-    <SearchContainerCityBuilding />
+    <SearchContainerLocation />
     <CityOverviewTable/>
     
 </template>

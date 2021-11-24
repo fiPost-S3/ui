@@ -13,15 +13,19 @@
           class="plus-location"
           icon="plus-square"
         />
-        
-        
+
+        <button
+                :class="[ 'small-btn-finish purple']"
+                @click="goToLocationOverview()">
+          Locaties
+        </button>
         <button 
-        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+        :class="[ 'small-btn-finish purple']"
          @click="goToCityOverview()">
          Steden
         </button>
         <button 
-        :class="[ 'small-btn-finish purple', disabled ? ' disabled' : '']"
+        :class="[ 'small-btn-finish purple']"
          @click="goToBuildingOverview()">
          Gebouwen
         </button>
@@ -44,6 +48,9 @@ const SearchContainer = defineComponent({
     valueChanged(val) {
       // Needs implementation.
       console.log(val);
+    },
+    goToLocationOverview() {
+      this.$router.push("/locaties");
     },
     goToAddLocationPage() {
       this.$router.push("/locaties/nieuw");

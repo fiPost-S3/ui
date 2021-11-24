@@ -1,7 +1,7 @@
 <template>
     <btn-back />
     <h1>Gebouwen Overzicht</h1>
-    <SearchContainerBuilding />
+    <SearchContainerLocation />
     <BuildingOverviewTable/>
     
 </template>

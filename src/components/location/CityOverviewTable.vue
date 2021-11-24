@@ -2,13 +2,13 @@
   <div>
     <LoadingIcon v-if="loading" />
     <div v-else>
-     
+
      <!-- <TableComponent
         :items="items"
         :editable="true"
         @cell-clicked="CellClicked"
       />  -->
-      
+
       <CityTable
         :items="items"
         @row-clicked="RowClicked"
@@ -107,6 +107,7 @@ export default class CityOverviewTable extends Vue {
       .catch((err: AxiosError) => {
         this.emitter.emit("err", err);
         this.loading = false;
+        this.$router.push("/login");
       });
   }
   async GetCities(){

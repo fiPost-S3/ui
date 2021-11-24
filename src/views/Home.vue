@@ -19,6 +19,7 @@ import LocationSvg from "@/components/svg/LocationSvg.vue";
 import RegisterSvg from "@/components/svg/RegisterSvg.vue";
 import ScanSvg from "@/components/svg/ScanSvg.vue";
 import SearchSvg from "@/components/svg/SearchSvg.vue";
+import axios from "axios";
 
 const Home = defineComponent({
   components: {
@@ -41,6 +42,18 @@ const Home = defineComponent({
       this.$router.push("/locaties");
     },
   },
+  mounted() {
+    //axios get
+    const config = {
+      'headers': {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+    }
+    console.log(config);
+    axios.get('https://localhost:44311/Authentication/auth', config )
+    .catch(err => {
+      console.log("test");
+      this.$router.push("/login");
+    })
+  }
 });
 export default Home;
 </script>

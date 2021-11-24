@@ -2,13 +2,13 @@
   <div>
     <LoadingIcon v-if="loading" />
     <div v-else>
-     
+
      <!-- <TableComponent
         :items="items"
         :editable="true"
         @cell-clicked="CellClicked"
       />  -->
-      
+
       <BuildingTable
         :items="items"
         @building-clicked="BuildingClicked"
@@ -89,7 +89,7 @@ export default class BuildingOverviewTable extends Vue {
   private pageCount = 0;
 
   beforeMount() {
-    
+
     this.GetBuildings();
     console.log("mount building table")
   }

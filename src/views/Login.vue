@@ -1,6 +1,5 @@
 <template>
   <div class="align-left">
-    <BtnBack class="button-back" />
     <div class="component-container">
       <h1>{{ !overview ? "Login" : "Overzicht" }}</h1>
       <LoadingIcon v-if="loadPers || loadRoom" />
@@ -15,7 +14,7 @@
             <InputField
               label="Wachtwoord:"
               v-model:input="password"
-              textType="password"             
+              textType="password"
             />
           </div>
         </div>
@@ -53,7 +52,7 @@ import axios from "axios";
     LoadingIcon,
   },
 })
-export default class RegisterPackage extends Vue {
+export default class Login extends Vue {
 
     errorText;
     private error: string[] = ["Niet alle velden zijn ingevuld"];
@@ -80,6 +79,7 @@ export default class RegisterPackage extends Vue {
           password: this.password
         }) .then(function (response) {
           localStorage.setItem('token', response.data);
+          //this.$router.push("/");
         })
       }
 

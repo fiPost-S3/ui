@@ -2,9 +2,8 @@
   <div class="input-container">
     <p class="header">{{ label }}</p>
     <input
-    
       :type="textType"
-      :class="cssClass"   
+      :class="cssClass"
       :value="input"
       @keyup="$emit('update:input', $event.target.value)"
     />

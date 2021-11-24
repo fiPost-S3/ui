@@ -2,13 +2,13 @@
   <div>
     <LoadingIcon v-if="loading" />
     <div v-else>
-     
+
      <!-- <TableComponent
         :items="items"
         :editable="true"
         @cell-clicked="CellClicked"
       />  -->
-      
+
       <LocationTable
         :allItems="allItems"
         :firstItem="firstItem"
@@ -170,7 +170,7 @@ export default class LocationOverviewTable extends Vue {
   }
 
   public loadPage(value: number) {
-    this.firstItem = value * this.visibleItemsPerPageCount - this.visibleItemsPerPageCount;    
+    this.firstItem = value * this.visibleItemsPerPageCount - this.visibleItemsPerPageCount;
     this.lastItem = value * this.visibleItemsPerPageCount;
     //this.GenerateTableObjects(this.rooms);
     this.GenerateAllTableObjects(this.allRooms);

@@ -7,7 +7,9 @@ import AddLocation from "@/views/AddLocation.vue";
 import LocationOverview from "@/views/LocationOverview.vue";
 import Login from "@/views/Login.vue";
 import SignUp from "@/views/Sign-up.vue";
-import CityOverview from "@/components/location/CityOverview.vue"; import BuildingOverview from "@/components/location/BuildingOverview.vue";
+import CityOverview from "@/components/location/CityOverview.vue";
+import BuildingOverview from "@/components/location/BuildingOverview.vue";
+
 const routes = [
     {
         path: "/registratie",
@@ -59,7 +61,11 @@ const routes = [
         name: "Gebouwen Overzicht",
         component: BuildingOverview
     },
-
+    {
+        path: "/locaties/gebouwen",
+        name: "Gebouwen Overzicht",
+        component: BuildingOverview
+    }
 ];
 
 const router = createRouter({

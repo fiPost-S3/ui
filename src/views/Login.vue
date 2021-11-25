@@ -79,14 +79,20 @@ export default class Login extends Vue {
           password: this.password
         }) .then(function (response) {
           localStorage.setItem('token', response.data);
-          //this.$router.push("/");
+          window.location.replace("/")
+        })
+        .catch(err => {
+          if (err.response.status == 401){
+            this.errorText = true;
+            this.error = [];
+            this.error.push("Er is iets mis gegaan");
+          }
         })
       }
 
       if (this.errorText) {
         this.btnText = "Opnieuw";
       }
-
     }
 }
 

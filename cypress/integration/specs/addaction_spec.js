@@ -5,6 +5,13 @@ describe('Test the add action to package', () => {
 
         cy.visit('http://localhost:8081');
 
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Zoeken').click();
     })
 })

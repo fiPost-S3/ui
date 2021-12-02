@@ -1,10 +1,3 @@
-// sample_spec.js created with Cypress
-//
-// Start writing your Cypress tests below!
-// If you're unfamiliar with how Cypress works,
-// check out the link below and learn how to write your first test:
-// https://on.cypress.io/writing-first-test
-
 describe('Correct Login', () => {
     it('Logs in with the right credentials', () => {
         cy.visit('http://localhost:8081');
@@ -12,6 +5,8 @@ describe('Correct Login', () => {
             .type('a@a.nl')
             .next().type('a')
         cy.contains('Inloggen').click()
+        cy.reload();
+        cy.contains('Logout').click();
     })
 });
 

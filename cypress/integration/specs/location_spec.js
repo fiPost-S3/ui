@@ -3,6 +3,13 @@ describe('Add + delete city', () => {
     it('Adds a city, then deletes it', () => {
         cy.visit('http://localhost:8081');
 
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Locaties').click();
 
         cy.url().should('include', '/locaties');
@@ -22,7 +29,7 @@ describe('Add + delete city', () => {
 
         cy.contains('Stad').click()
 
-        cy.request('https://localhost:44311/api/locations/rooms')
+        //cy.request('https://localhost:44311/api/locations/rooms')
 
         cy.get('.input')
             .should('be.visible')
@@ -46,6 +53,14 @@ describe('Add + delete city', () => {
 describe('Add + delete Building', () => {
     it('Adds a city + building, then deletes them', () => {
         cy.visit('http://localhost:8081');
+
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Locaties').click();
         cy.url().should('include', '/locaties');
         cy.get('#app > div > div.component-container.no-padding > div > div:nth-child(2) > svg').click();

@@ -2,7 +2,7 @@
 describe('Login test succes & failure', () => {
     it('Has elements', () => {
 
-        cy.visit('http://localhost:8080/#/login')
+        cy.visit('http://localhost:8081/#/login')
 
         cy.get('h1');
 
@@ -40,7 +40,7 @@ describe('Login test succes & failure', () => {
 describe('Login test succes & failure', () => {
     it('Has elements', () => { 
 
-        cy.visit('http://localhost:8080/#/sign-up')
+        cy.visit('http://localhost:8081/#/sign-up')
 
         cy.get('h1');
 

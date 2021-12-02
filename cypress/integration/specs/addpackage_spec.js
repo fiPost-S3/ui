@@ -5,6 +5,13 @@ describe('Test if the user can add a package', () => {
 
         cy.visit('http://localhost:8081');
 
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Registreren').click();
 
         cy.get('.input').first().type("Otto Eduard Leopold von Bismarck-Schönhausen");
@@ -23,16 +30,6 @@ describe('Test if the user can add a package', () => {
 
         cy.contains('Zoeken').click();
 
-        cy.contains("Paarse eenwieler")
-        
-
-
-
-
-
-
-
-
-     
+        cy.contains("Paarse eenwieler");
     })
   })

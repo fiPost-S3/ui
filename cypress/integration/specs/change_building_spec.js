@@ -2,13 +2,22 @@ describe('Update the building', () => {
     it('Updates the building and reverts it', () => {        
         cy.visit('http://localhost:8081');
 
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Locaties').click();
 
         cy.contains('Gebouwen').click();
 
         cy.contains('Stadhuis').click();
 
-        cy.get('.selected').click().then(option => {
+        cy.contains('Wijzig een gebouw');
+
+        cy.get('.selected').eq(1).click().then(option => {
             cy.wrap(option).siblings().contains('Wolluk').click();
         });
 
@@ -34,7 +43,9 @@ describe('Update the building', () => {
 
         cy.contains('Datssiuh').click();
 
-        cy.get('.selected').click().then(option => {
+        cy.contains('Wijzig een gebouw');
+
+        cy.get('.selected').eq(1).click().then(option => {
             cy.wrap(option).siblings().contains('Woensel-Noord').click();
         });
 

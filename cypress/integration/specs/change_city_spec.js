@@ -2,6 +2,13 @@ describe('Update the city', () => {
     it('Updates the city and reverts it', () => {
         cy.visit('http://localhost:8081');
 
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
+
         cy.contains('Locaties').click();
 
         cy.contains('Steden').click();

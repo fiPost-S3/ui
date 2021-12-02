@@ -1,25 +1,13 @@
-// sample_spec.js created with Cypress
-//
-// Start writing your Cypress tests below!
-// If you're unfamiliar with how Cypress works,
-// check out the link below and learn how to write your first test:
-// https://on.cypress.io/writing-first-test
-
-describe('My First Test', () => {
-    it('Does not do much!', () => {
-        expect(true).to.equal(true)
-    })
-});
-
-// describe('My First Test', () => {
-//     it('Does not do much!', () => {
-//         expect(true).to.equal(false)
-//     })
-// })
-
 describe('My First Test', () => {
     it('clicks the link "Locatie"', () => {
         cy.visit('http://localhost:8081');
+
+        cy.get('.input-container').first()
+            .type('a@a.nl')
+            .next().type('a')
+        cy.contains('Inloggen').click()
+
+        cy.reload();
 
         cy.contains('Locaties').click();
 
@@ -40,6 +28,6 @@ describe('My First Test', () => {
 
         cy.contains('Stad').click()
 
-        cy.request('https://localhost:44311/api/locations/rooms')
+        //cy.request('https://localhost:44311/api/locations/rooms')
     })
 });

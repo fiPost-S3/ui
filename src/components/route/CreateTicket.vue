@@ -48,6 +48,7 @@
                 <div class="container container-header modern-pink">
                   Laatste stap
                 </div>
+                <!--
                 <CBSearchSuggestions
                   :options="personOptions"
                   :custom="true"
@@ -58,7 +59,21 @@
                   <span>
                     Ik bevestig dat het pakket in goede orde is afgeleverd
                   </span>
-                </CBSearchSuggestions>
+                </CBSearchSuggestions> -->
+
+
+                    Scan de fontyspas voor checkout:
+
+                    <input type="text" placeholder="fontysid" v-model="textInputId">
+                    <button @click="scanFontyspas(textInputId)" value="Scan Pas">
+                    </button>
+                <div v-if="passcan">
+                  <div v-if="completedBy.name !== ''">
+                      <p>{{this.completedByName}}</p>
+
+                    <button value="Test">Test</button>
+                  </div>
+                </div>
               </div>
 
               <ul v-if="errors">
@@ -145,6 +160,10 @@ export default class CreateTicket extends Vue {
   private persons: Array<Person> = new Array<Person>();
   private personValid: Boolean = true;
   private personConfirmedValid: Boolean = true;
+  private completedBy: Person = new Person("","", "");
+  private textInputId = '';
+  private completedByName = '';
+  private passcan = false;
 
   private personChanged(personOption: SelectOption) {
     this.selectedPersonOption = personOption;
@@ -228,6 +247,21 @@ export default class CreateTicket extends Vue {
         this.adding = false;
       }
     }
+  }
+  beforeMount(){
+    this.completedBy = new Person("","","");
+    console.log("Dit is de beforemount");
+    console.log(this.completedBy);
+  }
+  private async scanFontyspas(){
+    await personeelService
+    .getByFontysId(this.textInputId)
+    .then((res) => {
+      this.completedBy = res;
+      this.completedByName = res.name;
+      console.log(this.completedBy);
+      this.passcan = true;
+    })
   }
 
   @Emit("new-ticket")
@@ -352,5 +386,23 @@ blockquote {
   .fc {
     font-size: 0px;
   }
+}
+
+.input {
+  user-select: none;
+  border: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: $background-color;
+  padding: 0px 0px;
+}
+
+.error {
+  background: #ffc9cf;
+}
+
+.input:focus {
+  outline: none;
+  border: 0px;
 }
 </style>

@@ -54,7 +54,9 @@
             title="Af te halen op"
           />
         </div>
+        
       </div>
+        
     </div>
   </div>
 </template>
@@ -67,6 +69,7 @@ import StatusBadge from "@/components/standardUi/StatusBadge.vue";
 import Room, { roomHelper } from "@/classes/Room";
 import Package from "@/classes/Package";
 import { dateConverter } from "@/classes/helpers/DateConverter";
+
 
 @Options({
   props: {

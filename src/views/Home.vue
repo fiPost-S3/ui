@@ -15,8 +15,23 @@
          <div>
            <button type="button" class="modal-default-button" @click="logout">Logout</button>
          </div>
+         <br>
+         
+        
+      
        </div>
     </div>
+    
+  </div>
+  <div>
+  <StreamBarcodeReader
+     @decode="onDecode"
+    @loaded="onLoaded"
+></StreamBarcodeReader>
+<ImageBarcodeReader
+    @decode="onDecode"
+    @error="onError"
+></ImageBarcodeReader>
   </div>
 </template>
 
@@ -29,10 +44,16 @@ import RegisterSvg from "@/components/svg/RegisterSvg.vue";
 import ScanSvg from "@/components/svg/ScanSvg.vue";
 import SearchSvg from "@/components/svg/SearchSvg.vue";
 import axios from "axios";
+// import StreamBarcodeReader from "./components/BarCodeScanner/StreamBarcodeReader.vue";
+import { StreamBarcodeReader } from "vue-barcode-reader";
+import { ImageBarcodeReader } from "vue-barcode-reader";
+
 
 const Home = defineComponent({
   components: {
-    Menu
+    Menu,
+    StreamBarcodeReader,
+    ImageBarcodeReader
   },
   data() {
     return {
@@ -55,6 +76,9 @@ const Home = defineComponent({
     logout(){
       localStorage.clear();
       this.$router.push("/login");
+    },
+    onDecode (result) {
+      console.log(result)
     }
   },
   mounted() {

@@ -32,6 +32,9 @@
                 :selectedOption="selectedPersonOption"
               >
                 <span class="hw">Afgeleverd door: </span>
+                <div tabindex="0" @keydown="keydowntest('keydown poep')">
+                  ergkwergierghio
+                </div>
               </CBSearchSuggestions>
               <CBSearchSuggestions
                 :options="roomOptions"
@@ -65,26 +68,31 @@
                     Scan de fontyspas voor checkout:
 
                     <input type="text" placeholder="fontysid" v-model="textInputId">
-                    <button @click="scanFontyspas(textInputId)" value="Scan Pas">
-                    </button>
-                <div v-if="passcan">
-                  <div v-if="completedBy.name !== ''">
-                      <p>{{this.completedByName}}</p>
+                <SmallBtnFinish
+                    class="finish"
+                    @btn-clicked="scanFontyspas(textInputId)"
+                    :text="'Scan Pas'"
+                    :isLoading="adding"
+                />
 
-                    <button value="Test">Test</button>
+                <div v-if="passcan">
+                  <div v-if="completedBy.name !== '' && completedBy != null">
+                      <p>{{completedBy.name}}</p>
+                    <SmallBtnFinish
+                        class="finish"
+                        @btn-clicked="addTicketAction()"
+                        :text="'Toevoegen'"
+                        :isLoading="adding"
+                    />
                   </div>
                 </div>
+
               </div>
 
               <ul v-if="errors">
                 <li v-for="e in errors" :key="e" class="error-text">{{ e }}</li>
               </ul>
-              <SmallBtnFinish
-                class="finish"
-                @btn-clicked="addTicketAction()"
-                :text="'Toevoegen'"
-                :isLoading="adding"
-              />
+
             </div>
           </div>
         </div>
@@ -207,7 +215,7 @@ export default class CreateTicket extends Vue {
 
     if (this.showPersonConfirmation) {
       if (
-        this.persons.some((p) => p.id == this.selectedPersonConfirmedOption.id)
+        this.completedBy.id != null && this.completedBy.id !== ""
       ) {
         this.personConfirmedValid = true;
       } else {
@@ -235,7 +243,7 @@ export default class CreateTicket extends Vue {
             packageId: this.fPackage.id,
             completedByPersonId: this.selectedPersonOption.id,
             receivedByPersonId: this.showPersonConfirmation
-              ? this.selectedPersonConfirmedOption.id
+              ? this.completedBy.id
               : "",
           } as TicketRequest)
           .then((res) => {
@@ -262,6 +270,9 @@ export default class CreateTicket extends Vue {
       console.log(this.completedBy);
       this.passcan = true;
     })
+  }
+  private async keydowntest(input: string) {
+    console.log(input);
   }
 
   @Emit("new-ticket")

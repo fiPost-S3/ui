@@ -32,9 +32,6 @@
                 :selectedOption="selectedPersonOption"
               >
                 <span class="hw">Afgeleverd door: </span>
-                <div tabindex="0" @keydown="keydowntest('keydown poep')">
-                  ergkwergierghio
-                </div>
               </CBSearchSuggestions>
               <CBSearchSuggestions
                 :options="roomOptions"
@@ -66,14 +63,14 @@
 
 
                     Scan de fontyspas voor checkout:
-
-                    <input type="text" placeholder="fontysid" v-model="textInputId">
-                <SmallBtnFinish
-                    class="finish"
-                    @btn-clicked="scanFontyspas(textInputId)"
-                    :text="'Scan Pas'"
-                    :isLoading="adding"
-                />
+                <StreamBarcodeReader
+                    @decode="onDecode"
+                    @loaded="onLoaded"
+                ></StreamBarcodeReader>
+                <ImageBarcodeReader
+                    @decode="onDecode"
+                    @error="onError"
+                ></ImageBarcodeReader>
 
                 <div v-if="passcan">
                   <div v-if="completedBy.name !== '' && completedBy != null">
@@ -111,6 +108,8 @@ import SelectOption from "@/classes/helpers/SelectOption";
 import SmallBtnFinish from "@/components/standardUi/SmallBtnFinish.vue";
 import TicketComp from "@/components/route/TicketComp.vue";
 import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
+import { StreamBarcodeReader } from "vue-barcode-reader";
+import { ImageBarcodeReader } from "vue-barcode-reader";
 
 // Types.
 import Person from "@/classes/Person";
@@ -134,6 +133,8 @@ import { Prop } from "vue-property-decorator";
     CBSearchSuggestions,
     LoadingIcon,
     TicketComp,
+    StreamBarcodeReader,
+    ImageBarcodeReader
   },
 })
 export default class CreateTicket extends Vue {
@@ -273,6 +274,18 @@ export default class CreateTicket extends Vue {
   }
   private async keydowntest(input: string) {
     console.log(input);
+  }
+  private async onDecode (result) {
+    this.textInputId = result;
+    await personeelService
+        .getByFontysId(this.textInputId)
+        .then((res) => {
+          this.completedBy = res;
+          this.completedByName = res.name;
+          console.log(this.completedBy);
+          this.passcan = true;
+        })
+    console.log(result)
   }
 
   @Emit("new-ticket")

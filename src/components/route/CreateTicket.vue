@@ -19,11 +19,19 @@
         <LoadingIcon v-if="loading" />
         <div class="finished-comp" v-else-if="fPackage.routeFinished">
           <TicketComp :ticket="fPackage.tickets[0]" />
+          
           <font-awesome-icon class="fc" icon="flag-checkered" />
         </div>
         <div v-else>
           <div v-if="!fPackage.routeFinished">
             <div class="form">
+              <!-- <InputField
+              label="Afgeleverd door:"
+              v-model:input="selectedPersonOption"
+              
+              
+              /> -->
+             
               <CBSearchSuggestions
                 :options="personOptions"
                 :custom="true"
@@ -100,7 +108,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 // Components.
 import CBSearchSuggestions from "@/components/standardUi/CBSearchSuggestions.vue";
@@ -110,7 +118,7 @@ import TicketComp from "@/components/route/TicketComp.vue";
 import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 import { StreamBarcodeReader } from "vue-barcode-reader";
 import { ImageBarcodeReader } from "vue-barcode-reader";
-
+import InputField from "@/components/standardUi/InputField.vue";
 // Types.
 import Person from "@/classes/Person";
 import Room from "@/classes/Room";
@@ -134,7 +142,8 @@ import { Prop } from "vue-property-decorator";
     LoadingIcon,
     TicketComp,
     StreamBarcodeReader,
-    ImageBarcodeReader
+    ImageBarcodeReader,
+    InputField
   },
 })
 export default class CreateTicket extends Vue {
@@ -165,6 +174,7 @@ export default class CreateTicket extends Vue {
     "",
     ""
   );
+  
   private personOptions: Array<SelectOption> = new Array<SelectOption>();
   private persons: Array<Person> = new Array<Person>();
   private personValid: Boolean = true;
@@ -207,12 +217,12 @@ export default class CreateTicket extends Vue {
 
   private async runValidation() {
     this.errors = [];
-    if (this.persons.some((p) => p.id == this.selectedPersonOption.id)) {
-      this.personValid = true;
-    } else {
-      this.errors.push("Deze persoon kon niet gevonden worden.");
-      this.personValid = false;
-    }
+    // if (this.persons.some((p) => p.id == this.selectedPersonOption.id)) {
+    //   this.personValid = true;
+    // } else {
+    //   this.errors.push("Deze persoon kon niet gevonden worden.");
+    //   this.personValid = false;
+    // }
 
     if (this.showPersonConfirmation) {
       if (
@@ -259,8 +269,7 @@ export default class CreateTicket extends Vue {
   }
   beforeMount(){
     this.completedBy = new Person("","","");
-    console.log("Dit is de beforemount");
-    console.log(this.completedBy);
+    
   }
   private async scanFontyspas(){
     await personeelService
@@ -313,18 +322,37 @@ export default class CreateTicket extends Vue {
         this.emitter.emit("err", err);
       });
 
-    await personeelService
-      .getAll()
-      .then((res) => {
-        this.persons = res;
-        this.persons.forEach((receiver) =>
-          this.personOptions.push(new SelectOption(receiver.id, receiver.name))
-        );
+    // await personeelService
+      // .getAll()
+      // .then((res) => {
+      var person;
+      axios.get('https://localhost:44369/api/Authentication/singleUser', {
+        headers: {
+          'Authorization' :  'Bearer ' + localStorage.getItem('token')
+        }
       })
-      .catch((err: AxiosError) => {
-        this.emitter.emit("err", err);
+      .then((response)=>{
+        
+        person = response.data;
+        this.persons = person;
+        console.log(this.persons)
+        
+        this.selectedPersonOption = new SelectOption(person.id, person.name)
+        console.log(this.selectedPersonOption)
+        //console.log(this.personOptions)
       });
-    this.loading = false;
+      
+        //this.personOptions.push(new SelectOption(person.id, person.name));
+        
+    //     this.persons = res;
+    //     this.persons.forEach((receiver) =>
+    //        this.personOptions.push(new SelectOption(receiver.id, receiver.name))
+    //      );
+    //   })
+    //   .catch((err: AxiosError) => {
+    //     this.emitter.emit("err", err);
+    //   });
+     this.loading = false;
   }
 }
 </script>

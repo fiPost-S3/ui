@@ -50,7 +50,14 @@
               >
                 <span class="hw">Op locatie: </span>
               </CBSearchSuggestions>
-
+              <div v-if="!showPersonConfirmation">
+              <SmallBtnFinish
+                        class="finish"
+                        @btn-clicked="addTicketAction()"
+                        :text="'Toevoegen'"
+                        :isLoading="adding"
+                    />
+              </div>
               <div v-if="showPersonConfirmation" class="confirm-person">
                 <hr />
                 <div class="container container-header modern-pink">
@@ -97,7 +104,7 @@
               <ul v-if="errors">
                 <li v-for="e in errors" :key="e" class="error-text">{{ e }}</li>
               </ul>
-
+              
             </div>
           </div>
         </div>
@@ -217,17 +224,18 @@ export default class CreateTicket extends Vue {
 
   private async runValidation() {
     this.errors = [];
-    // if (this.persons.some((p) => p.id == this.selectedPersonOption.id)) {
-    //   this.personValid = true;
-    // } else {
-    //   this.errors.push("Deze persoon kon niet gevonden worden.");
-    //   this.personValid = false;
-    // }
+    //  if (this.persons.some((p) => p.id == this.selectedPersonOption.id)) {
+     this.personValid = true;
+    //  else {
+    //    this.errors.push("Deze persoon kon niet gevonden worden.");
+    //    this.personValid = false;
+    //  }
 
     if (this.showPersonConfirmation) {
       if (
         this.completedBy.id != null && this.completedBy.id !== ""
       ) {
+        console.log(this.completedBy.id)
         this.personConfirmedValid = true;
       } else {
         this.errors.push("Deze persoon kon niet gevonden worden.");
@@ -244,23 +252,34 @@ export default class CreateTicket extends Vue {
   }
 
   private async addTicketAction() {
+
     if (!this.adding) {
       this.adding = true;
       await this.runValidation();
       if (this.errors.length < 1) {
+        console.log(this.selectedPersonOption.id)
+            console.log(this.selectedRoomOption.id)
+            console.log(this.fPackage.id)
+            console.log(this.showPersonConfirmation)
+            
+            console.log(this.completedBy.id)
         await pakketService
           .createTicket({
+            
             locationId: this.selectedRoomOption.id,
             packageId: this.fPackage.id,
-            completedByPersonId: this.selectedPersonOption.id,
+            completedByPersonId: this.selectedPersonOption.id.toString(),
             receivedByPersonId: this.showPersonConfirmation
               ? this.completedBy.id
               : "",
           } as TicketRequest)
           .then((res) => {
             this.adding = false;
+            console.log(this.selectedPersonOption.id)
           })
-          .catch((err) => {});
+          .catch((err) => {
+            
+          });
         this.newTicket();
       } else {
         this.adding = false;
@@ -305,18 +324,20 @@ export default class CreateTicket extends Vue {
       .getAll()
       .then((res) => {
         this.rooms = res;
-        this.rooms.forEach((room) =>
-          this.roomOptions.push(
-            new SelectOption(
-              room.id,
-              room.building.address.city.name +
-                ", " +
-                room.building.name +
-                ", " +
-                room.name
+        this.rooms.forEach((room) =>{
+          if(room.id != this.fPackage.tickets[0].location.id){
+            this.roomOptions.push(
+              new SelectOption(
+                room.id,
+                room.building.address.city.name +
+                  ", " +
+                  room.building.name +
+                  ", " +
+                  room.name
+              )
             )
-          )
-        );
+          }
+      });
       })
       .catch((err: AxiosError) => {
         this.emitter.emit("err", err);
@@ -332,26 +353,31 @@ export default class CreateTicket extends Vue {
         }
       })
       .then((response)=>{
-        
+        // if(response.data.id !== null && response.data.id !== "" && response.data.id !== 0){
+        //   this.showPersonConfirmation = true;
+        // }
         person = response.data;
         this.persons = person;
         console.log(this.persons)
         
         this.selectedPersonOption = new SelectOption(person.id, person.name)
         console.log(this.selectedPersonOption)
+        this.completedBy = person
         //console.log(this.personOptions)
-      });
+      // });
       
-        //this.personOptions.push(new SelectOption(person.id, person.name));
+        // this.personOptions.push(new SelectOption(person.id, person.name));
         
-    //     this.persons = res;
-    //     this.persons.forEach((receiver) =>
-    //        this.personOptions.push(new SelectOption(receiver.id, receiver.name))
-    //      );
-    //   })
-    //   .catch((err: AxiosError) => {
-    //     this.emitter.emit("err", err);
-    //   });
+        // this.persons = response;
+      //   this.persons.forEach((receiver) =>
+      //      this.personOptions.push(new SelectOption(receiver.id, receiver.name))
+      //    );
+      // })
+      });
+      // .catch((err: AxiosError) => {
+      //   this.emitter.emit("err", err);
+      //   console.log(err)
+      // });
      this.loading = false;
   }
 }

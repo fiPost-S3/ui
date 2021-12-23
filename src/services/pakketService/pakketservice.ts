@@ -32,6 +32,7 @@ export default class PakketService {
     const config = {
       'headers': {'Authorization': 'Bearer ' + localStorage.getItem('token')}
     }
+    console.log(request)
     const response = await http.post(`/api/packages/tickets`, request, config);
     return response.data;
   }

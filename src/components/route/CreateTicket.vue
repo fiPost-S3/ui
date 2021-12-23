@@ -25,13 +25,6 @@
         <div v-else>
           <div v-if="!fPackage.routeFinished">
             <div class="form">
-              <!-- <InputField
-              label="Afgeleverd door:"
-              v-model:input="selectedPersonOption"
-              
-              
-              /> -->
-             
               <CBSearchSuggestions
                 :options="personOptions"
                 :custom="true"
@@ -56,27 +49,13 @@
                         @btn-clicked="addTicketAction()"
                         :text="'Toevoegen'"
                         :isLoading="adding"
-                    />
+              />
               </div>
               <div v-if="showPersonConfirmation" class="confirm-person">
                 <hr />
                 <div class="container container-header modern-pink">
                   Laatste stap
                 </div>
-                <!--
-                <CBSearchSuggestions
-                  :options="personOptions"
-                  :custom="true"
-                  :valid="personConfirmedValid"
-                  @select-changed="personConfirmedChanged"
-                  :selectedOption="selectedPersonConfirmedOption"
-                >
-                  <span>
-                    Ik bevestig dat het pakket in goede orde is afgeleverd
-                  </span>
-                </CBSearchSuggestions> -->
-
-
                     Scan de fontyspas voor checkout:
                 <StreamBarcodeReader
                     @decode="onDecode"
@@ -98,9 +77,7 @@
                     />
                   </div>
                 </div>
-
               </div>
-
               <ul v-if="errors">
                 <li v-for="e in errors" :key="e" class="error-text">{{ e }}</li>
               </ul>
@@ -224,12 +201,7 @@ export default class CreateTicket extends Vue {
 
   private async runValidation() {
     this.errors = [];
-    //  if (this.persons.some((p) => p.id == this.selectedPersonOption.id)) {
-     this.personValid = true;
-    //  else {
-    //    this.errors.push("Deze persoon kon niet gevonden worden.");
-    //    this.personValid = false;
-    //  }
+    this.personValid = true;
 
     if (this.showPersonConfirmation) {
       if (
@@ -353,9 +325,6 @@ export default class CreateTicket extends Vue {
         }
       })
       .then((response)=>{
-        // if(response.data.id !== null && response.data.id !== "" && response.data.id !== 0){
-        //   this.showPersonConfirmation = true;
-        // }
         person = response.data;
         this.persons = person;
         console.log(this.persons)
@@ -363,21 +332,7 @@ export default class CreateTicket extends Vue {
         this.selectedPersonOption = new SelectOption(person.id, person.name)
         console.log(this.selectedPersonOption)
         this.completedBy = person
-        //console.log(this.personOptions)
-      // });
-      
-        // this.personOptions.push(new SelectOption(person.id, person.name));
-        
-        // this.persons = response;
-      //   this.persons.forEach((receiver) =>
-      //      this.personOptions.push(new SelectOption(receiver.id, receiver.name))
-      //    );
-      // })
       });
-      // .catch((err: AxiosError) => {
-      //   this.emitter.emit("err", err);
-      //   console.log(err)
-      // });
      this.loading = false;
   }
 }

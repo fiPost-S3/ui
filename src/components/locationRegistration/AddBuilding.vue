@@ -287,17 +287,6 @@ export default class AddBuilding extends Vue {
     this.numberValid = !isNaN(this.building.Address.Number);
     this.error = "";
   }
-  // async mounted() {
-  //   if (this.buildingId) {
-  //     this.isLoading = true;
-  //     console.log("getcity" + this.buildingId);
-  //     cityService.getById(this.buildingId).then((res) => {
-
-  //       this.building = new BuildingRequest(res.name);
-  //       this.isLoading = false;
-  //     });
-  //   }
- // }
 }
 </script>
 

@@ -16,7 +16,6 @@
       <div class="ticket-info-bot">
         Uitgevoerd door: {{ ticket.completedByPerson }}
         <br>
-        <!-- Aangenomen door: {{ ticket.receivedByPerson }} -->
       </div>
     </div>
   </div>

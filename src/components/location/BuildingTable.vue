@@ -1,6 +1,5 @@
 <template>
      <div class="component-container overflow table-container">
-     
     <table class="table" aria-describedby="Data table">
       <thead>
         <tr>
@@ -11,30 +10,26 @@
             @click="sortBy(index)"
             :class="{ active: sortKey === index }"
           >
-            {{ name }}
-            <span
-              class="arrow"
-              :class="sortOrders[index] > 0 ? 'asc' : 'dsc'"
-            />
+          {{ name }}
+          <span
+            class="arrow"
+            :class="sortOrders[index] > 0 ? 'asc' : 'dsc'"
+          />
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="entry in filteredItems" :key="entry" class="hoverElement" >
-            
           <td @click="$emit('building-clicked', entry.Gebouw.id)"
             v-for="cell in entry"
             :key="cell"
           >
-            {{ cell.displayName}} 
+          {{ cell.displayName}} 
           </td>
           <td class="editColumn" @click="$emit('building-clicked', entry.Gebouw.id)">
-            
               <span class="hide" />
-              
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>
@@ -75,9 +70,6 @@ ClickedTest(){
 
   get filteredItems(): Object[] {
     let filtered = this.items as Object[];
-
-    //TODO: filter items here
-
     return this.sortedItems(filtered);
   }
 

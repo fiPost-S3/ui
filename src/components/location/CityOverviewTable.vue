@@ -2,13 +2,6 @@
   <div>
     <LoadingIcon v-if="loading" />
     <div v-else>
-
-     <!-- <TableComponent
-        :items="items"
-        :editable="true"
-        @cell-clicked="CellClicked"
-      />  -->
-
       <CityTable
         :items="items"
         @row-clicked="RowClicked"
@@ -129,7 +122,6 @@ export default class CityOverviewTable extends Vue {
 
 public RowClicked(id: string){
     console.log("row-clicked: " + id);
-    // this.roomId = id;
     this.cityId = id;
     console.log("this.cityid= " + this.cityId)
     this.modalOpen = true;
@@ -168,34 +160,6 @@ GenerateTableObjects(cities: City[]){
   });
 }
 
-  // GenerateTableObjects(rooms: Room[]) {
-  //   this.items = new Array<Object>();
-  //   rooms.forEach((value) => {
-  //     this.items.push({
-  //       Stad: {
-  //         id: value.building.address.city.id,
-  //         displayName: value.building.address.city.name,
-  //         type: ColumnType.CITY,
-  //       } as TableCell,
-        // Gebouw: {
-        //   id: value.building.id,
-        //   displayName:
-        //     value.building.name +
-        //     ", " +
-        //     value.building.address.street +
-        //     " " +
-        //     value.building.address.number,
-        //   type: ColumnType.BUILDING,
-        // } as TableCell,
-        // Ruimte: {
-        //   id: value.id,
-        //   displayName: value.name,
-        //   type: ColumnType.ROOM,
-        // } as TableCell,
-  //     });
-  //   });
-  // }
-
   ReloadTable(): void {
     this.items = [];
     this.modalOpen = false;
@@ -210,22 +174,6 @@ GenerateTableObjects(cities: City[]){
     );
     this.GenerateTableObjects(this.cities);
   }
-
-
-  // ReloadTable(): void {
-  //   this.items = [];
-  //   this.modalOpen = false;
-  //   this.GetRooms();
-  // }
-
-  // public loadPage(value: number) {
-  //   const pageIndex = (value - 1) * this.visibleItemsPerPageCount;
-  //   this.rooms = this.allRooms.slice(
-  //     pageIndex,
-  //     pageIndex + this.visibleItemsPerPageCount
-  //   );
-  //   this.GenerateTableObjects(this.rooms);
-  // }
 }
 </script>
 

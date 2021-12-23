@@ -18,14 +18,12 @@
       labelText="Locaties"
       :source="getImgUrl('map.png')"
     />
-    
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import MenuItem from "@/components/MenuItem.vue";
-
 
 const Menu = defineComponent({
   components: {
@@ -61,7 +59,6 @@ const Menu = defineComponent({
 });
 export default Menu;
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "@/styling/main.scss";

@@ -1,7 +1,5 @@
 <template>
     <AddCity v-if="ColumnType == city" :cityId="cityId" @location-changed="ReloadTable" :title="updateCityTitle"/>
-    <!-- <AddBuilding v-if="ColumnType == building" :buildingId="buildingId" @location-changed="ReloadTable" :title="updateBuildingTitle"/>
-    <AddRoom  v-if="ColumnType == room" :roomId="roomId" @location-changed="ReloadTable" :title="updateRoomTitle"/> -->
 </template>
 
 <script lang="ts">
@@ -36,8 +34,6 @@ export default class CityInfo extends Vue {
   private room: ColumnType = ColumnType.ROOM;
 
   private updateCityTitle: string = "Wijzig een stad";
-//   private updateBuildingTitle: string = "Wijzig een gebouw";
-//   private updateRoomTitle: string = "Wijzig een kamer";
 
   @Prop()
   public cityId: string = "";

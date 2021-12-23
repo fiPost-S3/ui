@@ -66,8 +66,7 @@ video {
 .scanner-container {
     position: relative;
     background: darkslategray;
-    /* height: 100px;
-    width: 250px; */
+    
 }
 
 .overlay-element {

@@ -1,7 +1,5 @@
 <template>
-    <!-- <AddCity v-if="ColumnType == city" :cityId="cityId" @location-changed="ReloadTable" :title="updateCityTitle"/> -->
     <AddBuilding v-if="ColumnType == building" :buildingId="buildingId" @location-changed="ReloadTable" :title="updateBuildingTitle"/>
-    <!-- <AddRoom  v-if="ColumnType == room" :roomId="roomId" @location-changed="ReloadTable" :title="updateRoomTitle"/> -->
 </template>
 
 <script lang="ts">
@@ -13,7 +11,6 @@ import AddRoom from "@/components/locationRegistration/AddRoom.vue";
 import { ColumnType } from "@/classes/table/ColumnType";
 
 function EnumProp(d: string | number, e: Record<any, any>) {
-  // <- Record is changed
   return {
     default: d,
     validator: (v) => e[v] !== undefined,
@@ -34,10 +31,7 @@ export default class BuildingInfo extends Vue {
   private city: ColumnType = ColumnType.CITY;
   private building: ColumnType = ColumnType.BUILDING;
   private room: ColumnType = ColumnType.ROOM;
-
-  // private updateCityTitle: string = "Wijzig een stad";
-    private updateBuildingTitle: string = "Wijzig een gebouw";
-//   private updateRoomTitle: string = "Wijzig een kamer";
+  private updateBuildingTitle: string = "Wijzig een gebouw";
 
   @Prop()
   public cityId: string = "";

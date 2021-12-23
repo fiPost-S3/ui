@@ -72,9 +72,7 @@ ClickedTest(){
 
   get filteredItems(): Object[] {
     let filtered = this.items as Object[];
-
     //TODO: filter items here
-
     return this.sortedItems(filtered);
   }
 

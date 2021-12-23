@@ -37,6 +37,4 @@ export default class PakketService {
     return response.data;
   }
 }
-
-// A singleton instance
 export const pakketService = new PakketService();
